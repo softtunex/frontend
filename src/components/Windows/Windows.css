@@ -1,0 +1,182 @@
+/* windows.css - Windows Desktop Styles */
+
+/* Background Image */
+.windows-desktop .desktop-background {
+  background-image: url("https://res.cloudinary.com/duwdwr0r9/image/upload/v1741905937/windows-bg_frmgfl.jpg");
+}
+
+/* Desktop Icons */
+.windows-desktop .desktop-icons {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(6, auto);
+  gap: 10px;
+  width: fit-content;
+  height: fit-content;
+  max-height: 100%;
+}
+
+/* Windows Taskbar */
+.windows-desktop .taskbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background-color: #202020;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  z-index: 1000;
+}
+
+/* Start Button */
+.windows-desktop .start-button {
+  width: 42px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: background-color 0.2s;
+}
+
+.windows-desktop .start-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Taskbar Icons - centered in Windows 11 style */
+.windows-desktop .taskbar-icons {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 auto;
+}
+
+.windows-desktop .taskbar-icon {
+  width: 42px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  position: relative;
+  transition: background-color 0.2s;
+}
+
+.windows-desktop .taskbar-icon:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.windows-desktop .taskbar-badge {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  background-color: #1a73e8;
+  color: white;
+  border-radius: 4px;
+  font-size: 9px;
+  padding: 1px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Taskbar Right Side */
+.windows-desktop .taskbar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  color: white;
+  height: 100%;
+}
+
+.windows-desktop .taskbar-divider {
+  width: 1px;
+  height: 16px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0 5px;
+}
+
+/* Weather Widget */
+.windows-desktop .weather-widget {
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  font-size: 12px;
+  height: 100%;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.windows-desktop .weather-widget:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.windows-desktop .weather-widget .temperature {
+  font-weight: 400;
+}
+
+.windows-desktop .weather-widget .condition {
+  max-width: 165px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+/* System Tray Icons */
+.windows-desktop .notification-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 8px;
+  height: 100%;
+}
+
+.windows-desktop .notification-area > * {
+  cursor: pointer;
+}
+
+/* Time Widget */
+.windows-desktop .time-widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  font-size: 12px;
+  height: 100%;
+  cursor: pointer;
+}
+
+.windows-desktop .time-widget:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.windows-desktop .time-widget .time {
+  font-weight: 400;
+}
+
+.windows-desktop .time-widget .language {
+  font-size: 10px;
+  opacity: 0.8;
+}
+
+/* Made with Banner - Windows Version */
+.windows-desktop .made-with.windows {
+  position: absolute;
+  bottom: 45px;
+  right: 5px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
