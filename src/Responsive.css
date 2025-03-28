@@ -1,0 +1,140 @@
+/* responsive.css - Media Queries and Responsive Adjustments */
+
+/* Small Devices (phones, tablets <= 768px) */
+@media (max-width: 768px) {
+  .windows-desktop .desktop-icons,
+  .mac-desktop .desktop-icons {
+    grid-template-rows: repeat(3, auto);
+  }
+
+  .icon,
+  .app {
+    width: 70px;
+    min-width: 70px;
+    margin: 5px;
+  }
+
+  .icon-img,
+  .app-icon {
+    width: 45px;
+    height: 45px;
+  }
+
+  .mobile-interface {
+    width: 100%;
+    max-width: none;
+    border: none;
+    border-radius: 0;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .dock {
+    padding: 5px;
+    gap: 5px;
+  }
+
+  .dock-item {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Make weather widget smaller on mobile */
+  .mac-desktop .weather-widget.mac {
+    width: 180px;
+    height: 180px;
+  }
+
+  .mac-desktop .temperature {
+    font-size: 70px;
+  }
+}
+
+/* Medium Devices (tablets, small laptops 769px - 1200px) */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .windows-desktop .desktop-icons,
+  .mac-desktop .desktop-icons {
+    grid-template-rows: repeat(5, auto);
+  }
+
+  .mobile-interface {
+    width: 360px;
+    border: 10px solid #222;
+    border-radius: 30px;
+    height: 80vh;
+    margin: 10vh auto;
+  }
+
+  /* Ensure icons have appropriate spacing on medium screens */
+  .icon,
+  .app {
+    width: 75px;
+    min-width: 75px;
+  }
+}
+
+/* Large Devices (desktops, large laptops >= 1201px) */
+@media (min-width: 1201px) {
+  .windows-desktop .desktop-icons,
+  .mac-desktop .desktop-icons {
+    grid-template-rows: repeat(6, auto);
+  }
+
+  .mobile-interface {
+    width: 400px;
+    border: 12px solid #222;
+    border-radius: 40px;
+    height: 85vh;
+    margin: 7.5vh auto;
+  }
+
+  /* More relaxed spacing on larger screens */
+  .icon,
+  .app {
+    width: 85px;
+    min-width: 85px;
+    margin: 10px;
+  }
+}
+
+/* Extra Small Devices (narrow windows <= 500px) */
+@media (max-width: 500px) {
+  .windows-desktop .desktop-icons,
+  .mac-desktop .desktop-icons {
+    grid-template-rows: repeat(2, auto);
+  }
+
+  .icon,
+  .app {
+    width: 60px;
+    min-width: 60px;
+    margin: 4px;
+  }
+
+  .icon-img,
+  .app-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .icon-label,
+  .app-label {
+    font-size: 11px;
+  }
+
+  /* Adjust taskbar for narrow screens */
+  .windows-desktop .taskbar .condition {
+    display: none;
+  }
+
+  /* Make weather widget even smaller */
+  .mac-desktop .weather-widget.mac {
+    width: 150px;
+    height: 150px;
+    right: 10px;
+  }
+
+  .mac-desktop .temperature {
+    font-size: 60px;
+  }
+}
