@@ -1,0 +1,576 @@
+.mac-finder {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: #333333;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  color: #e8e8e8;
+  overflow: hidden;
+}
+
+/* Finder Toolbar */
+.mac-finder-toolbar {
+  height: 38px;
+  background-color: #232323;
+  border-bottom: 1px solid #1a1a1a;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 10px;
+}
+
+.mac-finder-navigation {
+  display: flex;
+  gap: 2px;
+}
+
+.mac-finder-nav-button {
+  width: 28px;
+  height: 24px;
+  border-radius: 4px;
+  background-color: #222222;
+  border: 1px solid #333333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaaaaa;
+  cursor: pointer;
+}
+
+.mac-finder-nav-button:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.mac-finder-view-options {
+  display: flex;
+  background-color: #222222;
+  border-radius: 4px;
+  border: 1px solid #333333;
+  overflow: hidden;
+}
+
+.mac-finder-view-button {
+  width: 28px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  border-right: 1px solid #333333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaaaaa;
+  cursor: pointer;
+}
+
+.mac-finder-view-button:last-child {
+  border-right: none;
+}
+
+.mac-finder-view-button:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.mac-finder-view-button.active {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.mac-finder-path-indicator {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.mac-finder-search {
+  margin-left: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.mac-finder-search input {
+  height: 24px;
+  width: 180px;
+  border: none;
+  border-radius: 4px;
+  padding: 0 8px 0 24px;
+  background-color: #555555;
+  font-size: 12px;
+  color: #ffffff;
+}
+
+.mac-finder-search .iconify {
+  position: absolute;
+  left: 7px;
+  color: #e8e8e8;
+}
+
+/* Main Finder Content */
+.mac-finder-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Sidebar */
+.mac-finder-sidebar {
+  background-color: #232323;
+  padding-top: 10px;
+  overflow-y: auto;
+  user-select: none;
+  width: 180px;
+}
+
+.mac-finder-sidebar-section {
+  margin-bottom: 16px;
+}
+
+.mac-finder-sidebar-header {
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #aaaaaa;
+  margin-bottom: 5px;
+  margin-top: 16px;
+}
+
+.mac-finder-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-size: 13px;
+  color: #ffffff;
+  cursor: pointer;
+  margin: 2px 0;
+}
+
+.mac-finder-sidebar-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.mac-finder-sidebar-item.active {
+  background-color: rgba(0, 102, 204, 0.8);
+  color: #ffffff;
+}
+
+/* Tags */
+.mac-finder-tag {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.mac-finder-tag.red {
+  background-color: #fc625d;
+}
+
+.mac-finder-tag.orange {
+  background-color: #fdbc40;
+}
+
+.mac-finder-tag.yellow {
+  background-color: #ffde40;
+}
+
+.mac-finder-tag.green {
+  background-color: #35c649;
+}
+
+.mac-finder-tag.blue {
+  background-color: #1d93ef;
+}
+
+.mac-finder-tag.purple {
+  background-color: #a550a0;
+}
+
+.mac-finder-tag.grey {
+  background-color: #888888;
+}
+
+/* Resize handle for sidebar */
+.mac-finder-resize-handle {
+  width: 1px;
+  background-color: #151515;
+  height: 100%;
+  cursor: col-resize;
+  position: relative;
+}
+
+.mac-finder-resize-handle:hover,
+.mac-finder-resize-handle:active {
+  background-color: #1d93ef;
+}
+
+/* Files area */
+.mac-finder-files {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #2a2a2a;
+}
+
+.mac-finder-path-bar {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  font-size: 12px;
+  gap: 4px;
+  border-bottom: 1px solid #1a1a1a;
+  background-color: #232323;
+}
+
+.mac-finder-path-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.mac-finder-path-item:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.mac-finder-path-item.current {
+  background-color: #e3f1fc;
+  font-weight: 500;
+}
+
+.mac-finder-files-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+/* Gallery View */
+.mac-finder-gallery-view {
+  padding: 20px;
+}
+
+.mac-finder-gallery-item {
+  display: flex;
+  background-color: #262626;
+  border-radius: 8px;
+  border: 1px solid #151515;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.mac-finder-gallery-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  border-color: #c0c0c0;
+}
+
+.mac-finder-preview {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border-right: 1px solid #e0e0e0;
+}
+
+.mac-finder-file-info {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mac-finder-file-name {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.mac-finder-file-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 16px;
+}
+
+.mac-finder-file-description {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+.mac-finder-file-url {
+  font-size: 12px;
+  color: #1d93ef;
+  text-decoration: none;
+  display: block;
+  word-break: break-all;
+}
+
+.mac-finder-file-url:hover {
+  text-decoration: underline;
+}
+
+.mac-finder-list-view {
+  width: 100%;
+}
+
+.mac-finder-list-header {
+  display: flex;
+  padding: 8px 16px;
+  background-color: #232323;
+  border-bottom: 1px solid #1a1a1a;
+  font-size: 12px;
+  color: #aaaaaa;
+  font-weight: 500;
+}
+
+.mac-finder-list-item {
+  display: flex;
+  padding: 8px 16px;
+  background-color: #2a2a2a;
+  border-bottom: 1px solid #1a1a1a;
+  font-size: 13px;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.mac-finder-list-item:hover {
+  background-color: rgba(0, 102, 204, 0.3);
+}
+
+.mac-finder-list-col {
+  display: flex;
+  align-items: center;
+}
+
+.mac-finder-list-col.name {
+  flex: 2;
+}
+
+.mac-finder-list-col.date,
+.mac-finder-list-col.size,
+.mac-finder-list-col.kind {
+  flex: 1;
+  color: #aaaaaa;
+}
+
+/* Icon View */
+.mac-finder-icon-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.mac-finder-icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.mac-finder-icon-item:hover {
+  background-color: rgba(0, 102, 204, 0.3);
+  color: #ffffff;
+}
+
+.mac-finder-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  margin-bottom: 8px;
+}
+
+.mac-finder-icon-name {
+  text-align: center;
+  font-size: 13px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #f5f5f5;
+}
+
+/* Column View */
+.mac-finder-column-view {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.mac-finder-column {
+  width: 240px;
+  border-right: 1px solid #e0e0e0;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.mac-finder-column-header {
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.mac-finder-column-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.mac-finder-column-item:hover {
+  background-color: rgba(0, 102, 204, 0.3);
+}
+
+.mac-finder-column-item.active {
+  background-color: rgba(0, 102, 204, 0.3);
+}
+
+.mac-finder-preview-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.mac-finder-preview-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  max-width: 300px;
+}
+
+.mac-finder-preview-icon {
+  margin-bottom: 16px;
+}
+
+.mac-finder-preview-name {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.mac-finder-preview-meta {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.mac-finder-preview-item {
+  display: flex;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.mac-finder-preview-item .label {
+  flex: 0 0 70px;
+  color: #777;
+}
+
+.mac-finder-preview-item .value {
+  flex: 1;
+}
+
+.mac-finder-preview-item .value.url {
+  color: #1d93ef;
+  word-break: break-all;
+}
+
+.mac-finder-preview-button {
+  padding: 6px 16px;
+  background-color: #1d93ef;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.mac-finder-preview-button:hover {
+  background-color: #0080db;
+}
+
+/* Finder Status Bar */
+.mac-finder-status-bar {
+  height: 22px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #d8d8d8;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 11px;
+  color: #777;
+}
+
+.mac-finder-status-item {
+  padding: 0 8px;
+}
+
+/* Enhanced dock indicators for open applications */
+.dock-dot {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.mac-finder-status-spacer {
+  flex: 1;
+}
+
+/* Type-specific styling */
+.mac-finder.portfolio .mac-finder-path-item.current {
+  color: #1877f2;
+}
+
+.mac-finder.blog .mac-finder-path-item.current {
+  color: #44a8b3;
+}
+
+.mac-finder.resume .mac-finder-path-item.current {
+  color: #f40f02;
+}
+
+.mac-finder.github .mac-finder-path-item.current {
+  color: #333;
+}
+
+.mac-finder.linkedin .mac-finder-path-item.current {
+  color: #0a66c2;
+}

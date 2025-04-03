@@ -1,19 +1,99 @@
-/* windows.css - Windows Desktop Styles */
+/* Made with Banner - Windows Version */
+.windows-desktop .made-with.windows {
+  position: absolute;
+  bottom: 45px;
+  right: 5px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  z-index: 15;
+} /* windows.css - Windows Desktop Styles */
 
-/* Background Image */
+/* Desktop Background */
 .windows-desktop .desktop-background {
   background-image: url("https://res.cloudinary.com/duwdwr0r9/image/upload/v1741905937/windows-bg_frmgfl.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Desktop Icons Container */
+.windows-desktop .desktop-icons-container {
+  padding: 15px;
+  height: calc(100vh - 40px);
+  overflow: auto;
+  position: relative;
+  z-index: 10;
 }
 
 /* Desktop Icons */
 .windows-desktop .desktop-icons {
   display: grid;
+  grid-template-columns: auto;
   grid-auto-flow: column;
   grid-template-rows: repeat(6, auto);
   gap: 10px;
   width: fit-content;
   height: fit-content;
   max-height: 100%;
+}
+
+.windows-desktop .icon {
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.windows-desktop .icon:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.windows-desktop .icon-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 6px;
+}
+
+.windows-desktop .icon-label {
+  color: white;
+  font-size: 12px;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.windows-desktop .icon-badge {
+  position: absolute;
+  top: -5px;
+  right: 15px;
+  background-color: #e44d26;
+  color: white;
+  border-radius: 10px;
+  font-size: 9px;
+  padding: 1px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
 }
 
 /* Windows Taskbar */
@@ -23,7 +103,7 @@
   left: 0;
   right: 0;
   height: 40px;
-  background-color: #202020;
+  background-color: #0d1117;
   display: flex;
   align-items: center;
   padding: 0;
@@ -39,17 +119,48 @@
   justify-content: center;
   color: #fff;
   transition: background-color 0.2s;
+  cursor: pointer;
+  margin-left: 5px;
 }
 
 .windows-desktop .start-button:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Weather Widget - Left Side */
+.windows-desktop .weather-widget.taskbar-left {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 12px;
+  height: 100%;
+  white-space: nowrap;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.windows-desktop .weather-widget.taskbar-left:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.windows-desktop .weather-widget .temperature {
+  font-weight: 400;
+  margin-right: 5px;
+}
+
+.windows-desktop .weather-widget .condition {
+  max-width: 165px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
 /* Taskbar Icons - centered in Windows 11 style */
 .windows-desktop .taskbar-icons {
   display: flex;
   align-items: center;
-  gap: 0;
+  gap: 4px;
   height: 100%;
   position: absolute;
   left: 50%;
@@ -66,17 +177,34 @@
   color: #fff;
   position: relative;
   transition: background-color 0.2s;
+  cursor: pointer;
 }
 
 .windows-desktop .taskbar-icon:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+.windows-desktop .taskbar-icon:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  width: 40%;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 1px;
+  display: none;
+}
+
+.windows-desktop .taskbar-icon:hover:after {
+  display: block;
+}
+
 .windows-desktop .taskbar-badge {
   position: absolute;
   bottom: 3px;
   right: 3px;
-  background-color: #1a73e8;
+  background-color: #e44d26;
   color: white;
   border-radius: 4px;
   font-size: 9px;
@@ -100,33 +228,6 @@
   height: 16px;
   background-color: rgba(255, 255, 255, 0.2);
   margin: 0 5px;
-}
-
-/* Weather Widget */
-.windows-desktop .weather-widget {
-  display: flex;
-  align-items: center;
-  padding: 0 6px;
-  font-size: 12px;
-  height: 100%;
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.windows-desktop .weather-widget:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.windows-desktop .weather-widget .temperature {
-  font-weight: 400;
-}
-
-.windows-desktop .weather-widget .condition {
-  max-width: 165px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 12px;
 }
 
 /* System Tray Icons */
@@ -167,16 +268,430 @@
   opacity: 0.8;
 }
 
-/* Made with Banner - Windows Version */
-.windows-desktop .made-with.windows {
-  position: absolute;
-  bottom: 45px;
-  right: 5px;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
-  padding: 4px 8px;
+/* Window content styles */
+
+/* Projects Window */
+.projects-window-content {
+  padding: 20px;
+  color: #f0f0f0;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.project-card {
+  background-color: #2d2d2d;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+}
+
+.project-card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #61dafb;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.tech-tag {
+  background-color: #444;
+  color: #ddd;
+  padding: 3px 8px;
   border-radius: 4px;
   font-size: 12px;
+}
+
+/* Portfolio Window */
+.portfolio-window-content {
+  padding: 24px;
+  color: #333;
+}
+
+.portfolio-header {
   display: flex;
   align-items: center;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.portfolio-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 60px;
+  object-fit: cover;
+  border: 3px solid #1877f2;
+}
+
+.portfolio-header h1 {
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.portfolio-header h3 {
+  margin: 0 0 4px 0;
+  color: #666;
+  font-weight: normal;
+}
+
+.portfolio-section {
+  margin-bottom: 24px;
+}
+
+.portfolio-section h3 {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-tag {
+  background-color: #f1f1f1;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Blog Window */
+.blog-window-content {
+  padding: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.blog-posts {
+  margin-top: 24px;
+}
+
+.blog-post {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #eee;
+}
+
+.blog-post h3 {
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.blog-date {
+  color: #888;
+  font-size: 14px;
+  margin: 0 0 16px 0;
+}
+
+/* Resume Window */
+.resume-window-content {
+  padding: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #333;
+}
+
+.resume-window-content h1 {
+  margin: 0 0 5px 0;
+}
+
+.resume-window-content h2 {
+  margin: 0 0 30px 0;
+  font-weight: normal;
+  color: #666;
+}
+
+.resume-section {
+  margin-bottom: 30px;
+}
+
+.resume-section h3 {
+  border-bottom: 2px solid #f40f02;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+.resume-item {
+  margin-bottom: 20px;
+}
+
+.resume-item h4 {
+  margin: 0 0 5px 0;
+}
+
+.resume-date {
+  color: #888;
+  margin: 0 0 10px 0;
+  font-size: 14px;
+}
+
+/* GitHub Window */
+.github-window-content {
+  padding: 24px;
+  background-color: #f6f8fa;
+  color: #24292e;
+}
+
+.github-stats {
+  display: flex;
+  gap: 24px;
+  margin: 20px 0 30px;
+  justify-content: center;
+}
+
+.github-stat {
+  background-color: white;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 16px;
+  text-align: center;
+  min-width: 120px;
+}
+
+.github-stat h3 {
+  margin: 0 0 8px 0;
+  font-size: 24px;
+}
+
+.github-stat p {
+  margin: 0;
+  color: #666;
+}
+
+.github-repos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.github-repo {
+  background-color: white;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.github-repo h3 {
+  margin: 0 0 10px 0;
+  color: #0366d6;
+}
+
+.github-repo p {
+  margin: 0 0 16px 0;
+  color: #586069;
+}
+
+.repo-footer {
+  display: flex;
+  gap: 16px;
+  color: #586069;
+  font-size: 14px;
+}
+
+/* LinkedIn Window */
+.linkedin-window-content {
+  padding: 24px;
+  color: #333;
+}
+
+.linkedin-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 30px;
+  background-color: #f3f6f8;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.linkedin-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 60px;
+  object-fit: cover;
+  border: 3px solid #0a66c2;
+}
+
+.linkedin-header h1 {
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.linkedin-header h3 {
+  margin: 0 0 4px 0;
+  color: #666;
+  font-weight: normal;
+}
+
+.linkedin-section {
+  margin-bottom: 24px;
+}
+
+.linkedin-section h3 {
+  color: #0a66c2;
+  margin-bottom: 16px;
+}
+
+.linkedin-experience-item {
+  margin-bottom: 16px;
+}
+
+.linkedin-experience-item h4 {
+  margin: 0 0 4px 0;
+}
+
+.linkedin-experience-item p {
+  margin: 0 0 4px 0;
+  color: #666;
+}
+
+/* Taskbar updates for window management */
+.windows-desktop .taskbar-icon.active:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  width: 40%;
+  height: 2px;
+  background-color: #1e90ff;
+  border-radius: 1px;
+  display: block;
+}
+
+.windows-desktop .taskbar-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  width: 40%;
+  height: 2px;
+  background-color: #1e90ff;
+  border-radius: 1px;
+}
+/* Taskbar updates for minimized windows */
+.windows-desktop .taskbar-icon.minimized:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  width: 40%;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 1px;
+  display: block;
+}
+
+.windows-desktop .taskbar-icon.minimized:hover:after {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Additional window styling for different content types */
+.window.projects .window-content {
+  background-color: #f8f8f8;
+  padding: 0;
+}
+
+.window.portfolio .window-content,
+.window.blog .window-content,
+.window.resume .window-content,
+.window.github .window-content,
+.window.linkedin .window-content {
+  padding: 0;
+}
+
+/* For showing the window preview when hovering over taskbar icons */
+.windows-desktop .taskbar-window-preview {
+  position: absolute;
+  bottom: 45px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.windows-desktop .taskbar-icon:hover .taskbar-window-preview {
+  opacity: 1;
+}
+
+/* Animations for window open/close */
+@keyframes windowOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes windowClose {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.window {
+  animation: windowOpen 0.15s ease-out;
+}
+
+.window.closing {
+  animation: windowClose 0.15s ease-out forwards;
+}
+
+/* Improved window dragging styles */
+.window.dragging {
+  opacity: 0.8;
+  transition: none;
+}
+
+.window-titlebar {
+  user-select: none;
+}
+
+/* Window resize handle styling */
+.window-resize-handle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 16px;
+  height: 16px;
+  cursor: nwse-resize;
+}
+
+.window-resize-handle:before {
+  content: "";
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
 }

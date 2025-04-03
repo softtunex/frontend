@@ -489,3 +489,174 @@
     height: 160px;
   }
 }
+
+/* Add these custom scrollbar styles to your existing ProjectModal.css */
+
+/* Custom scrollbar for modal content - both Windows and Mac */
+.modal-container.windows,
+.modal-container.mac,
+.modal-content.windows,
+.modal-content.mac {
+  /* Firefox scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: #666 #222;
+}
+
+/* WebKit browsers (Chrome, Safari, newer Edge) */
+.modal-container.windows::-webkit-scrollbar,
+.modal-container.mac::-webkit-scrollbar,
+.modal-content.windows::-webkit-scrollbar,
+.modal-content.mac::-webkit-scrollbar {
+  width: 6px; /* Very thin scrollbar */
+}
+
+.modal-container.windows::-webkit-scrollbar-track,
+.modal-container.mac::-webkit-scrollbar-track,
+.modal-content.windows::-webkit-scrollbar-track,
+.modal-content.mac::-webkit-scrollbar-track {
+  background: #222; /* Dark background */
+  border-radius: 3px;
+}
+
+.modal-container.windows::-webkit-scrollbar-thumb,
+.modal-container.mac::-webkit-scrollbar-thumb,
+.modal-content.windows::-webkit-scrollbar-thumb,
+.modal-content.mac::-webkit-scrollbar-thumb {
+  background-color: #666; /* Grayish bar */
+  border-radius: 3px;
+}
+
+.modal-container.windows::-webkit-scrollbar-thumb:hover,
+.modal-container.mac::-webkit-scrollbar-thumb:hover,
+.modal-content.windows::-webkit-scrollbar-thumb:hover,
+.modal-content.mac::-webkit-scrollbar-thumb:hover {
+  background-color: #888; /* Lighter when hovered */
+}
+
+/* Fix for overflow behavior in modal container */
+.modal-container.windows {
+  overflow: hidden;
+}
+
+.modal-content.windows {
+  overflow-y: auto;
+  max-height: calc(90vh - 40px);
+}
+
+.modal-container.mac {
+  overflow: hidden;
+}
+
+.modal-content.mac {
+  overflow-y: auto;
+  max-height: calc(90vh - 40px);
+}
+
+/* ProjectModal isolation fixes - add this to your codebase */
+
+/* Isolate ProjectModal from Mac/Windows explorers by boosting specificity */
+.modal-overlay.windows,
+.modal-overlay.mac {
+  /* Ensure modal appears on top */
+  z-index: 9999 !important;
+  /* Prevent other components from affecting the modal background */
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Ensure modal container sits on top and has correct styling */
+.modal-container.windows,
+.modal-container.mac {
+  z-index: 10000 !important;
+  position: relative !important;
+}
+
+/* Prevent inheritance from Mac Finder styling */
+.mac-window-controls {
+  /* Reset any inherited properties */
+  background-color: #1e1e1e !important;
+  border-bottom: 1px solid #3a3a3a !important;
+  padding: 12px !important;
+}
+
+.mac-control {
+  /* Ensure control buttons display correctly */
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+}
+
+.mac-control.close {
+  background-color: #ff5f56 !important;
+}
+.mac-control.minimize {
+  background-color: #ffbd2e !important;
+}
+.mac-control.expand {
+  background-color: #27c93f !important;
+}
+
+/* Fix styling for Windows modal components */
+.modal-content.windows {
+  padding: 20px !important;
+  background-color: #1e1e1e !important;
+}
+
+.close-button.windows {
+  z-index: 10001 !important; /* Ensure close button appears on top */
+  color: white !important;
+}
+
+/* Fix for project items */
+.project-item.windows,
+.project-item.mac {
+  /* Reset any unwanted properties */
+  display: flex !important;
+}
+
+.project-item.windows {
+  background-color: #262626 !important;
+}
+
+.project-item.mac {
+  background-color: #2a2a2a !important;
+}
+
+/* Ensure project grid layouts are maintained */
+.projects-grid.windows {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 20px !important;
+}
+
+.projects-grid.mac {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 15px !important;
+}
+
+/* Fix for specific project modal elements */
+.modal-content.windows h2,
+.modal-content.mac h2 {
+  color: white !important;
+}
+
+/* Fix scrolling */
+.modal-content.windows,
+.modal-content.mac {
+  overflow-y: auto !important;
+  max-height: calc(90vh - 40px) !important;
+}
+
+/* Re-apply correct font families */
+.modal-overlay.windows,
+.modal-container.windows,
+.modal-content.windows {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.modal-overlay.mac,
+.modal-container.mac,
+.modal-content.mac {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
+    sans-serif !important;
+}

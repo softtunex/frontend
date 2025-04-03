@@ -299,3 +299,243 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1),
     inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
+
+/* Common Modal Styles */
+.mac-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mac-modal {
+  width: 450px;
+  background-color: #222222;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  color: white;
+  overflow: hidden;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.mac-modal-titlebar {
+  position: relative;
+  height: 25px;
+  text-align: center;
+  padding-top: 8px;
+}
+
+.mac-window-controls {
+  position: absolute;
+  display: flex;
+  gap: 6px;
+  left: 10px;
+  top: 9px;
+}
+
+.mac-window-control {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.mac-window-control.close {
+  background-color: #ff5f57;
+}
+
+.mac-window-control.minimize {
+  background-color: #febc2e;
+}
+
+.mac-window-control.maximize {
+  background-color: #28c840;
+}
+
+.mac-modal-title {
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.mac-button {
+  padding: 6px 14px;
+  background-color: rgba(120, 120, 120, 0.3);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.mac-button:hover {
+  background-color: rgba(140, 140, 140, 0.4);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/* About Me Modal Specific Styles */
+.about-me-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+.about-me-avatar-container {
+  margin-bottom: 15px;
+}
+
+.about-me-avatar {
+  width: 90px;
+  height: 90px;
+}
+
+.about-me-name {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+  text-align: center;
+}
+
+.about-me-job-title {
+  font-size: 16px;
+  color: #cccccc;
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+.about-me-details {
+  width: 100%;
+  text-align: left;
+}
+
+.about-me-detail {
+  margin-bottom: 5px;
+  display: flex;
+}
+
+.about-me-label {
+  font-weight: 500;
+  width: 100px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.about-me-value {
+  flex: 1;
+  line-height: 1.4;
+}
+
+/* Contact Modal Specific Styles */
+.contact-content {
+  padding: 15px;
+}
+
+.contact-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.contact-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.contact-info {
+  flex: 1;
+}
+
+.contact-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.contact-title {
+  font-size: 14px;
+  color: #cccccc;
+  margin: 0;
+}
+
+.contact-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.contact-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.contact-action-button {
+  width: 50px;
+  height: 50px;
+  background-color: #007aff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.contact-action span {
+  font-size: 12px;
+  color: #007aff;
+}
+
+.contact-details {
+  margin-bottom: 15px;
+}
+
+.contact-detail {
+  padding: 12px 0;
+  border-bottom: 1px solid #333;
+}
+
+.contact-detail:last-child {
+  border-bottom: none;
+}
+
+.contact-detail-label {
+  color: #999;
+  margin-bottom: 5px;
+}
+
+.contact-detail-value {
+  color: white;
+}

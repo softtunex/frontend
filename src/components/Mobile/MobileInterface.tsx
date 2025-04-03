@@ -1,5 +1,5 @@
 // src/components/Mobile/MobileInterface.tsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import "./Mobile.css";
 
@@ -21,6 +21,7 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
   weather,
 }) => {
   const [showNotification, setShowNotification] = useState(true);
+  const [isFullScreen, setIsFullScreen] = useState(false);
   const currentDate = new Date();
   const day = currentDate.getDate();
 
@@ -29,6 +30,38 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
     hour: "2-digit",
     minute: "2-digit",
   });
+
+  // Check fullscreen state when component mounts
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullScreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    };
+  }, []);
+
+  // Function to toggle fullscreen
+  const toggleFullScreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch((err) => {
+        console.error(`Error attempting to enable fullscreen: ${err.message}`);
+      });
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  };
+
+  // Function to open link in a new tab
+  const openLink = (url: string) => {
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  // Function to handle notifications
   const renderNotificationOverlay = () => {
     if (showNotification) {
       return (
@@ -53,6 +86,7 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
     }
     return null;
   };
+
   // Render Safari interface for iOS
   const renderSafariInterface = () => {
     if (deviceType === "ios") {
@@ -116,6 +150,22 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
     );
   };
 
+  // Get weather icon based on condition
+  const getWeatherIcon = (condition: string) => {
+    const conditionMap: Record<string, string> = {
+      Clear: "mdi:weather-sunny",
+      Sunny: "mdi:weather-sunny",
+      Clouds: "mdi:weather-cloudy",
+      Cloudy: "mdi:weather-cloudy",
+      Rain: "mdi:weather-rainy",
+      Drizzle: "mdi:weather-partly-rainy",
+      Thunderstorm: "mdi:weather-lightning-rainy",
+      Snow: "mdi:weather-snowy",
+    };
+
+    return conditionMap[condition] || "mdi:weather-partly-cloudy";
+  };
+
   // Render Weather Widget based on device type
   const renderWeatherWidget = () => {
     if (deviceType === "ios") {
@@ -127,11 +177,11 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
               <div key={index} className="forecast-day">
                 <div className="day">{day.day}</div>
                 <div className="icon">
-                  {day.condition === "Cloudy" ? (
-                    <Icon icon="mdi:weather-cloudy" width="22" color="white" />
-                  ) : (
-                    <Icon icon="mdi:weather-sunny" width="22" color="white" />
-                  )}
+                  <Icon
+                    icon={getWeatherIcon(day.condition)}
+                    width="22"
+                    color="white"
+                  />
                 </div>
                 <div className="temp">{day.temperature}°</div>
               </div>
@@ -154,7 +204,9 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
                 />
                 Lagos
               </div>
-              <div className="weather-condition">Partly cloudy</div>
+              <div className="weather-condition">
+                {weather.condition || "Partly cloudy"}
+              </div>
             </div>
             <div className="weather-temp">{weather.temperature}°</div>
           </div>
@@ -165,11 +217,7 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
                   {index === 0 ? "Today" : day.day}
                 </div>
                 <Icon
-                  icon={
-                    day.condition === "Cloudy"
-                      ? "mdi:weather-cloudy"
-                      : "mdi:weather-sunny"
-                  }
+                  icon={getWeatherIcon(day.condition)}
                   width="20"
                   color="white"
                 />
@@ -182,80 +230,97 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
     }
   };
 
+  // Function to handle app clicks
+  const handleAppClick = (app: any) => {
+    if (app.onClick) {
+      app.onClick();
+    }
+  };
+
+  // Define app icons with links
+  const appIcons = [
+    {
+      id: 1,
+      label: "Projects",
+      icon: "logos:javascript",
+      badge: "8+",
+      color: "#54C5F8",
+    },
+    {
+      id: 2,
+      label: "Blog",
+      icon: "mdi:post-outline",
+      badge: "3",
+      color: "#44a8b3",
+      onClick: () => openLink("https://medium.com/@olatunjibuari8"),
+    },
+    {
+      id: 3,
+      label: "Résumé",
+      icon: "mdi:file-pdf-box",
+      color: "#f40f02",
+      onClick: () =>
+        openLink(
+          "https://drive.google.com/file/d/1b-5QtzA8b3ywoA6G-1wH8yajuekJtM3x/view"
+        ),
+    },
+    {
+      id: 4,
+      label: "Github",
+      icon: "mdi:github",
+      badge: "10+",
+      color: undefined,
+      onClick: () => openLink("https://github.com/softtunex"),
+    },
+    {
+      id: 5,
+      label: "LinkedIn",
+      icon: "mdi:linkedin",
+      badge: "4K+",
+      color: "#0A66C2",
+      onClick: () =>
+        openLink("https://www.linkedin.com/in/olatunji-buari-a87031190/"),
+    },
+    {
+      id: 6,
+      label: "Calendar",
+      specialIcon: "calendar",
+      day: day,
+    },
+    {
+      id: 7,
+      label: "Portfolio",
+      icon: "mdi:web",
+      color: "#1877f2",
+      onClick: () => openLink("https://buariolatunji.netlify.app/"),
+    },
+    {
+      id: 8,
+      label: "Language",
+      specialIcon: "language",
+      text: "EN",
+    },
+    {
+      id: 9,
+      label: deviceType === "ios" ? "Android mode" : "iOS mode",
+      icon: deviceType === "ios" ? "mdi:android" : "mdi:apple",
+      color: deviceType === "ios" ? "#3DDC84" : undefined,
+    },
+    {
+      id: 10,
+      label: "Fullscreen",
+      icon: isFullScreen ? "mdi:fullscreen-exit" : "mdi:fullscreen",
+      color: "#FFCA28",
+      onClick: toggleFullScreen,
+    },
+  ];
+
   // Render App Icons
   const renderAppGrid = () => {
-    const appIcons = [
-      {
-        id: 1,
-        label: "Projects",
-        icon: "simple-icons:flutter",
-        badge: "8+",
-        color: "#54C5F8",
-      },
-      {
-        id: 2,
-        label: "Packages",
-        icon: "mdi:package-variant-closed",
-        badge: "3",
-        color: "#44a8b3",
-      },
-      {
-        id: 3,
-        label: "Résumé",
-        icon: "mdi:file-pdf-box",
-        color: "#f40f02",
-      },
-      {
-        id: 4,
-        label: "Github",
-        icon: "mdi:github",
-        badge: "10+",
-        color: undefined,
-      },
-      {
-        id: 5,
-        label: "LinkedIn",
-        icon: "mdi:linkedin",
-        badge: "4K+",
-        color: "#0A66C2",
-      },
-      {
-        id: 6,
-        label: "Calendar",
-        specialIcon: "calendar",
-        day: day,
-      },
-      {
-        id: 7,
-        label: "FaceFolio",
-        icon: "mdi:facebook",
-        color: "#1877f2",
-      },
-      {
-        id: 8,
-        label: "Language",
-        specialIcon: "language",
-        text: "EN",
-      },
-      {
-        id: 9,
-        label: deviceType === "ios" ? "Android mode" : "iOS mode",
-        icon: deviceType === "ios" ? "mdi:android" : "mdi:apple",
-        color: deviceType === "ios" ? "#3DDC84" : undefined,
-      },
-      {
-        id: 10,
-        label: "Buy Me A Coffee",
-        icon: "mdi:coffee",
-        badge: "new",
-        color: "#FFCA28",
-      },
-    ];
-
     return (
       <div className="app-grid">
         {appIcons.map((app) => (
-          <div key={app.id} className="app">
+          <div key={app.id} className="app" onClick={() => handleAppClick(app)}>
             {app.specialIcon === "calendar" ? (
               <div className="app-icon calendar">
                 <div className="calendar-day">{app.day}</div>
@@ -289,14 +354,23 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
           <div className="dock-item">
             <Icon icon="mdi:phone" width="28" color="#34C759" />
           </div>
-          <div className="dock-item">
+          <div
+            className="dock-item"
+            onClick={() => openLink("https://buariolatunji.netlify.app/")}
+          >
             <Icon icon="mdi:safari" width="28" color="#1C9CF6" />
           </div>
-          <div className="dock-item">
-            <Icon icon="mdi:email" width="28" color="#1A9DFB" />
+          <div
+            className="dock-item"
+            onClick={() => openLink("https://medium.com/@olatunjibuari8")}
+          >
+            <Icon icon="mdi:post-outline" width="28" color="#1A9DFB" />
           </div>
-          <div className="dock-item">
-            <Icon icon="mdi:account-circle" width="28" color="#F57C00" />
+          <div
+            className="dock-item"
+            onClick={() => openLink("https://github.com/softtunex")}
+          >
+            <Icon icon="mdi:github" width="28" color="#F57C00" />
           </div>
         </div>
       );
@@ -306,36 +380,44 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
           <div className="dock-item">
             <Icon icon="mdi:phone" width="28" color="#3DDC84" />
           </div>
-          <div className="dock-item">
+          <div
+            className="dock-item"
+            onClick={() => openLink("https://buariolatunji.netlify.app/")}
+          >
             <Icon icon="mdi:google-chrome" width="28" color="#4285F4" />
           </div>
-          <div className="dock-item">
-            <Icon icon="mdi:gmail" width="28" color="#EA4335" />
+          <div
+            className="dock-item"
+            onClick={() => openLink("https://medium.com/@olatunjibuari8")}
+          >
+            <Icon icon="mdi:post-outline" width="28" color="#EA4335" />
           </div>
-          <div className="dock-item">
-            <Icon icon="mdi:account-circle" width="28" color="#FFFFFF" />
+          <div
+            className="dock-item"
+            onClick={() => openLink("https://github.com/softtunex")}
+          >
+            <Icon icon="mdi:github" width="28" color="#FFFFFF" />
           </div>
         </div>
       );
     }
   };
 
-  // Add "Made with Flutter" badge for iOS
+  // Render "Made with React" badge
   const renderMadeWithBadge = () => {
-    if (deviceType === "ios") {
-      return (
-        <div className="made-with-flutter">
-          <Icon
-            icon="simple-icons:flutter"
-            width="16"
-            style={{ marginRight: "6px" }}
-            color="#54C5F8"
-          />
-          <span>Made with Flutter</span>
-        </div>
-      );
-    }
-    return null;
+    const badgeClass =
+      deviceType === "ios" ? "made-with-badge ios" : "made-with-badge android";
+    return (
+      <div className={badgeClass}>
+        <Icon
+          icon="simple-icons:react"
+          width="16"
+          style={{ marginRight: "6px" }}
+          color="#61DAFB"
+        />
+        <span>Made with React</span>
+      </div>
+    );
   };
 
   return (
