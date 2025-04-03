@@ -1,0 +1,148 @@
+/* MacWindow.css */
+.mac-window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: #2a2a2a;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  resize: both;
+  transition: box-shadow 0.2s ease;
+  color: #e8e8e8;
+}
+
+.mac-window.active {
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+}
+
+.mac-window-titlebar {
+  display: flex;
+  align-items: center;
+  background-color: #232323;
+  height: 38px;
+  cursor: default;
+  user-select: none;
+  border-bottom: 1px solid #1a1a1a;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.mac-window-controls {
+  display: flex;
+  align-items: center;
+  margin-left: 12px;
+  gap: 8px;
+}
+
+.mac-window-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.mac-window-control.close {
+  background-color: #ff5f57;
+  color: transparent;
+}
+
+.mac-window-control.minimize {
+  background-color: #febc2e;
+  color: transparent;
+}
+
+.mac-window-control.maximize {
+  background-color: #28c840;
+  color: transparent;
+}
+
+.mac-window-control:hover span {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.mac-window-control span {
+  font-size: 14px;
+  line-height: 0;
+}
+
+.mac-window-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  gap: 6px;
+}
+
+.mac-window-content {
+  flex: 1;
+  overflow: auto;
+  background-color: #2a2a2a;
+}
+
+/* Window animations */
+@keyframes macWindowOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.mac-window {
+  animation: macWindowOpen 0.2s ease-out;
+}
+
+/* Custom window styles for different applications */
+.mac-window.portfolio .mac-window-content,
+.mac-window.blog .mac-window-content,
+.mac-window.resume .mac-window-content,
+.mac-window.github .mac-window-content,
+.mac-window.linkedin .mac-window-content {
+  padding: 0;
+}
+
+/* Resize handle styling */
+.mac-window:not(.maximized) {
+  resize: both;
+}
+
+/* Animations for window minimize effect */
+@keyframes macWindowMinimize {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.7) translateY(300px);
+  }
+}
+
+.mac-window.minimizing {
+  animation: macWindowMinimize 0.2s ease-out forwards;
+}
+
+/* Animation for window maximize */
+@keyframes macWindowMaximize {
+  from {
+    border-radius: 10px;
+  }
+  to {
+    border-radius: 0;
+  }
+}
+
+.mac-window.maximizing {
+  animation: macWindowMaximize 0.2s ease-out forwards;
+}

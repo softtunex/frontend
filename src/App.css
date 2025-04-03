@@ -44,7 +44,8 @@ body {
 .icon-badge,
 .badge {
   position: absolute;
-  top: -5px;
+  display: none;
+  top: -2px;
   right: -5px;
   background-color: red;
   color: white;
