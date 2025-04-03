@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import "./Mobile.css";
+import "./Mobile.css";
 
 interface MobileInterfaceProps {
   deviceType: "ios" | "android";

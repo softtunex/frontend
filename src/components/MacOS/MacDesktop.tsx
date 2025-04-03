@@ -876,6 +876,14 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
           osType="mac" // Pass "mac" to ensure macOS styling
         />
       </div>
+
+      {/* Add the ProjectModal component */}
+      <ProjectModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        projectId={selectedProjectId}
+        osType="mac" // Pass "mac" to ensure macOS styling
+      />
     </div>
   );
 };
