@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import "./Windows.css";
 import Window from "../WindowModal/Window";

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* Made with Banner - Windows Version */
 .windows-desktop .made-with.windows {
   position: absolute;
@@ -32,22 +31,12 @@
   overflow: auto;
   position: relative;
   z-index: 10;
-=======
-/* windows.css - Windows Desktop Styles */
-
-/* Background Image */
-.windows-desktop .desktop-background {
-  background-image: url("https://res.cloudinary.com/duwdwr0r9/image/upload/v1741905937/windows-bg_frmgfl.jpg");
->>>>>>> 8f8e92fd6efff35859bfd748c7f7b0c5a19f068f
 }
 
 /* Desktop Icons */
 .windows-desktop .desktop-icons {
   display: grid;
-<<<<<<< HEAD
   grid-template-columns: auto;
-=======
->>>>>>> 8f8e92fd6efff35859bfd748c7f7b0c5a19f068f
   grid-auto-flow: column;
   grid-template-rows: repeat(6, auto);
   gap: 10px;
@@ -56,7 +45,6 @@
   max-height: 100%;
 }
 
-<<<<<<< HEAD
 .windows-desktop .icon {
   width: 80px;
   display: flex;
@@ -108,8 +96,6 @@
   z-index: 1;
 }
 
-=======
->>>>>>> 8f8e92fd6efff35859bfd748c7f7b0c5a19f068f
 /* Windows Taskbar */
 .windows-desktop .taskbar {
   position: absolute;
@@ -117,11 +103,7 @@
   left: 0;
   right: 0;
   height: 40px;
-<<<<<<< HEAD
   background-color: #0d1117;
-=======
-  background-color: #202020;
->>>>>>> 8f8e92fd6efff35859bfd748c7f7b0c5a19f068f
   display: flex;
   align-items: center;
   padding: 0;
@@ -137,18 +119,14 @@
   justify-content: center;
   color: #fff;
   transition: background-color 0.2s;
-<<<<<<< HEAD
   cursor: pointer;
   margin-left: 5px;
-=======
->>>>>>> 8f8e92fd6efff35859bfd748c7f7b0c5a19f068f
 }
 
 .windows-desktop .start-button:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-<<<<<<< HEAD
 /* Weather Widget - Left Side */
 .windows-desktop .weather-widget.taskbar-left {
   display: flex;
@@ -178,17 +156,11 @@
   font-size: 12px;
 }
 
-=======
->>>>>>> 8f8e92fd6efff35859bfd748c7f7b0c5a19f068f
 /* Taskbar Icons - centered in Windows 11 style */
 .windows-desktop .taskbar-icons {
   display: flex;
   align-items: center;
-<<<<<<< HEAD
   gap: 4px;
-=======
-  gap: 0;
->>>>>>> 8f8e92fd6efff35859bfd748c7f7b0c5a19f068f
   height: 100%;
   position: absolute;
   left: 50%;
@@ -205,17 +177,13 @@
   color: #fff;
   position: relative;
   transition: background-color 0.2s;
-<<<<<<< HEAD
   cursor: pointer;
-=======
->>>>>>> 8f8e92fd6efff35859bfd748c7f7b0c5a19f068f
 }
 
 .windows-desktop .taskbar-icon:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-<<<<<<< HEAD
 .windows-desktop .taskbar-icon:after {
   content: "";
   position: absolute;
@@ -232,17 +200,11 @@
   display: block;
 }
 
-=======
->>>>>>> 8f8e92fd6efff35859bfd748c7f7b0c5a19f068f
 .windows-desktop .taskbar-badge {
   position: absolute;
   bottom: 3px;
   right: 3px;
-<<<<<<< HEAD
   background-color: #e44d26;
-=======
-  background-color: #1a73e8;
->>>>>>> 8f8e92fd6efff35859bfd748c7f7b0c5a19f068f
   color: white;
   border-radius: 4px;
   font-size: 9px;
@@ -268,36 +230,6 @@
   margin: 0 5px;
 }
 
-<<<<<<< HEAD
-=======
-/* Weather Widget */
-.windows-desktop .weather-widget {
-  display: flex;
-  align-items: center;
-  padding: 0 6px;
-  font-size: 12px;
-  height: 100%;
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.windows-desktop .weather-widget:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.windows-desktop .weather-widget .temperature {
-  font-weight: 400;
-}
-
-.windows-desktop .weather-widget .condition {
-  max-width: 165px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 12px;
-}
-
->>>>>>> 8f8e92fd6efff35859bfd748c7f7b0c5a19f068f
 /* System Tray Icons */
 .windows-desktop .notification-area {
   display: flex;
@@ -336,7 +268,6 @@
   opacity: 0.8;
 }
 
-<<<<<<< HEAD
 /* Window content styles */
 
 /* Projects Window */
@@ -763,7 +694,7 @@
   height: 8px;
   border-right: 2px solid rgba(0, 0, 0, 0.3);
   border-bottom: 2px solid rgba(0, 0, 0, 0.3);
-=======
+}
 /* Made with Banner - Windows Version */
 .windows-desktop .made-with.windows {
   position: absolute;
@@ -776,5 +707,4 @@
   font-size: 12px;
   display: flex;
   align-items: center;
->>>>>>> 8f8e92fd6efff35859bfd748c7f7b0c5a19f068f
 }
