@@ -111,7 +111,7 @@ interface DockItemProps {
 const MobileDock: React.FC<{
   deviceType: "ios" | "android";
   dockItems: DockItemProps[];
-}> = ({ deviceType, dockItems }) => {
+}> = ({ dockItems }) => {
   return (
     <div className="mobile-dock">
       {dockItems.map((item, index) => (
@@ -122,18 +122,14 @@ const MobileDock: React.FC<{
               alt="User"
               className="dock-avatar"
               style={{
-                width: deviceType === "ios" ? "36px" : "32px",
-                height: deviceType === "ios" ? "36px" : "32px",
+                width: "32px",
+                height: "32px",
                 borderRadius: "50%",
                 objectFit: "cover",
               }}
             />
           ) : (
-            <Icon
-              icon={item.icon}
-              width={deviceType === "ios" ? "28" : "24"}
-              color={item.color}
-            />
+            <Icon icon={item.icon} width={"24"} color={item.color} />
           )}
         </div>
       ))}
@@ -301,25 +297,6 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
               </div>
             </div>
             <div className="iphone-notch"></div>
-          </div>
-
-          {/* Safari bottom bar */}
-          <div className="safari-bottom-bar">
-            <div className="safari-bottom-item">
-              <Icon icon="mdi:chevron-left" width="24" />
-            </div>
-            <div className="safari-bottom-item">
-              <Icon icon="mdi:chevron-right" width="24" />
-            </div>
-            <div className="safari-bottom-item">
-              <Icon icon="mdi:share-variant-outline" width="24" />
-            </div>
-            <div className="safari-bottom-item">
-              <Icon icon="mdi:book-outline" width="24" />
-            </div>
-            <div className="safari-bottom-item">
-              <Icon icon="mdi:application-outline" width="24" />
-            </div>
           </div>
         </>
       );

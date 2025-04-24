@@ -167,7 +167,7 @@
 /* Made with Flutter badge */
 .made-with-badge {
   position: fixed;
-  bottom: 120px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   background-color: rgba(0, 0, 0, 0.5);
