@@ -2,7 +2,19 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import "./Mobile.css";
-import "./Mobile.css";
+
+interface AppIconProps {
+  id: number;
+  label: string;
+  icon?: string;
+  badge?: string;
+  color?: string;
+  specialIcon?: "calendar" | "language";
+  avatar?: string;
+  day?: number;
+  text?: string;
+  onClick?: () => void;
+}
 
 interface MobileInterfaceProps {
   deviceType: "ios" | "android";
@@ -16,6 +28,187 @@ interface MobileInterfaceProps {
     }>;
   };
 }
+
+// Function to get weather icon based on condition
+const getWeatherIcon = (condition: string): string => {
+  const conditionMap: Record<string, string> = {
+    Clear: "mdi:weather-sunny",
+    Sunny: "mdi:weather-sunny",
+    Clouds: "mdi:weather-cloudy",
+    Cloudy: "mdi:weather-cloudy",
+    Rain: "mdi:weather-rainy",
+    Drizzle: "mdi:weather-partly-rainy",
+    Thunderstorm: "mdi:weather-lightning-rainy",
+    Snow: "mdi:weather-snowy",
+  };
+
+  return conditionMap[condition] || "mdi:weather-partly-cloudy";
+};
+
+/**
+ * Mobile App Icon Component
+ */
+const MobileIcon: React.FC<AppIconProps> = ({
+  label,
+  icon,
+  badge,
+  color,
+  specialIcon,
+  avatar,
+  day,
+  text,
+  onClick,
+}) => {
+  return (
+    <div className="app" onClick={onClick}>
+      {specialIcon === "calendar" ? (
+        <div className="app-icon calendar">
+          <div className="calendar-day">{day}</div>
+        </div>
+      ) : specialIcon === "language" ? (
+        <div className="app-icon language">
+          <span>{text}</span>
+        </div>
+      ) : (
+        <div className="app-icon">
+          {badge && (
+            <div className={`badge ${badge === "new" ? "new" : ""}`}>
+              {badge}
+            </div>
+          )}
+          {avatar ? (
+            <img
+              src={avatar}
+              alt={label}
+              className="icon-avatar"
+              style={{
+                width: "36px",
+                height: "36px",
+                borderRadius: "50%",
+                objectFit: "cover",
+              }}
+            />
+          ) : (
+            icon && <Icon icon={icon} width="28" color={color} />
+          )}
+        </div>
+      )}
+      <div className="app-label">{label}</div>
+    </div>
+  );
+};
+
+interface DockItemProps {
+  icon: string;
+  color?: string;
+  avatar?: string;
+  onClick?: () => void;
+}
+
+/**
+ * Mobile Dock Component
+ */
+const MobileDock: React.FC<{
+  deviceType: "ios" | "android";
+  dockItems: DockItemProps[];
+}> = ({ deviceType, dockItems }) => {
+  return (
+    <div className="mobile-dock">
+      {dockItems.map((item, index) => (
+        <div key={index} className="dock-item" onClick={item.onClick}>
+          {item.avatar ? (
+            <img
+              src={item.avatar}
+              alt="User"
+              className="dock-avatar"
+              style={{
+                width: deviceType === "ios" ? "36px" : "32px",
+                height: deviceType === "ios" ? "36px" : "32px",
+                borderRadius: "50%",
+                objectFit: "cover",
+              }}
+            />
+          ) : (
+            <Icon
+              icon={item.icon}
+              width={deviceType === "ios" ? "28" : "24"}
+              color={item.color}
+            />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+/**
+ * Weather Widget Component
+ */
+const MobileWeather: React.FC<{
+  deviceType: "ios" | "android";
+  weather: MobileInterfaceProps["weather"];
+}> = ({ deviceType, weather }) => {
+  if (deviceType === "ios") {
+    // iOS style horizontal forecast
+    return (
+      <div className="weather-widget mobile">
+        <div className="forecast">
+          {weather.forecast.map((day, index) => (
+            <div key={index} className="forecast-day">
+              <div className="day">{day.day}</div>
+              <div className="icon">
+                <Icon
+                  icon={getWeatherIcon(day.condition)}
+                  width="22"
+                  color="white"
+                />
+              </div>
+              <div className="temp">{day.temperature}°</div>
+            </div>
+          ))}
+        </div>
+        <div className="label">Weather</div>
+      </div>
+    );
+  } else {
+    // Android style weather widget with current temperature focus
+    return (
+      <div className="weather-widget mobile">
+        <div className="weather-header">
+          <div>
+            <div className="weather-location">
+              <Icon
+                icon="mdi:map-marker"
+                width="16"
+                style={{ marginRight: "4px" }}
+              />
+              Lagos
+            </div>
+            <div className="weather-condition">
+              {weather.condition || "Partly cloudy"}
+            </div>
+          </div>
+          <div className="weather-temp">{weather.temperature}°</div>
+        </div>
+        <div className="weather-forecast">
+          {weather.forecast.slice(0, 4).map((day, index) => (
+            <div key={index} className="forecast-item">
+              <div className="forecast-day">
+                {index === 0 ? "Today" : day.day}
+              </div>
+              <Icon
+                icon={getWeatherIcon(day.condition)}
+                width="20"
+                color="white"
+              />
+              <div className="forecast-temp">{day.temperature}°</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+};
 
 const MobileInterface: React.FC<MobileInterfaceProps> = ({
   deviceType,
@@ -151,101 +344,15 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
     );
   };
 
-  // Get weather icon based on condition
-  const getWeatherIcon = (condition: string) => {
-    const conditionMap: Record<string, string> = {
-      Clear: "mdi:weather-sunny",
-      Sunny: "mdi:weather-sunny",
-      Clouds: "mdi:weather-cloudy",
-      Cloudy: "mdi:weather-cloudy",
-      Rain: "mdi:weather-rainy",
-      Drizzle: "mdi:weather-partly-rainy",
-      Thunderstorm: "mdi:weather-lightning-rainy",
-      Snow: "mdi:weather-snowy",
-    };
-
-    return conditionMap[condition] || "mdi:weather-partly-cloudy";
-  };
-
-  // Render Weather Widget based on device type
-  const renderWeatherWidget = () => {
-    if (deviceType === "ios") {
-      // iOS style horizontal forecast
-      return (
-        <div className="weather-widget mobile">
-          <div className="forecast">
-            {weather.forecast.map((day, index) => (
-              <div key={index} className="forecast-day">
-                <div className="day">{day.day}</div>
-                <div className="icon">
-                  <Icon
-                    icon={getWeatherIcon(day.condition)}
-                    width="22"
-                    color="white"
-                  />
-                </div>
-                <div className="temp">{day.temperature}°</div>
-              </div>
-            ))}
-          </div>
-          <div className="label">Weather</div>
-        </div>
-      );
-    } else {
-      // Android style weather widget with current temperature focus
-      return (
-        <div className="weather-widget mobile">
-          <div className="weather-header">
-            <div>
-              <div className="weather-location">
-                <Icon
-                  icon="mdi:map-marker"
-                  width="16"
-                  style={{ marginRight: "4px" }}
-                />
-                Lagos
-              </div>
-              <div className="weather-condition">
-                {weather.condition || "Partly cloudy"}
-              </div>
-            </div>
-            <div className="weather-temp">{weather.temperature}°</div>
-          </div>
-          <div className="weather-forecast">
-            {weather.forecast.slice(0, 4).map((day, index) => (
-              <div key={index} className="forecast-item">
-                <div className="forecast-day">
-                  {index === 0 ? "Today" : day.day}
-                </div>
-                <Icon
-                  icon={getWeatherIcon(day.condition)}
-                  width="20"
-                  color="white"
-                />
-                <div className="forecast-temp">{day.temperature}°</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      );
-    }
-  };
-
-  // Function to handle app clicks
-  const handleAppClick = (app: any) => {
-    if (app.onClick) {
-      app.onClick();
-    }
-  };
-
   // Define app icons with links
-  const appIcons = [
+  const appIcons: AppIconProps[] = [
     {
       id: 1,
       label: "Projects",
       icon: "logos:javascript",
       badge: "8+",
       color: "#54C5F8",
+      onClick: () => openLink("https://github.com/softtunex"),
     },
     {
       id: 2,
@@ -287,6 +394,7 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
       label: "Calendar",
       specialIcon: "calendar",
       day: day,
+      onClick: () => openLink("https://calendly.com/olatunjibuari8/30min"),
     },
     {
       id: 7,
@@ -316,110 +424,28 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
     },
   ];
 
-  // Render App Icons
-  const renderAppGrid = () => {
-    return (
-      <div className="app-grid">
-        {appIcons.map((app) => (
-          <div key={app.id} className="app" onClick={() => handleAppClick(app)}>
-            {app.specialIcon === "calendar" ? (
-              <div className="app-icon calendar">
-                <div className="calendar-day">{app.day}</div>
-              </div>
-            ) : app.specialIcon === "language" ? (
-              <div className="app-icon language">
-                <span>{app.text}</span>
-              </div>
-            ) : (
-              <div className="app-icon">
-                {app.badge && (
-                  <div className={`badge ${app.badge === "new" ? "new" : ""}`}>
-                    {app.badge}
-                  </div>
-                )}
-                <Icon icon={app.icon!} width="28" color={app.color} />
-              </div>
-            )}
-            <div className="app-label">{app.label}</div>
-          </div>
-        ))}
-      </div>
-    );
-  };
-
-  // Render Mobile Dock based on device type
-  const renderMobileDock = () => {
-    if (deviceType === "ios") {
-      return (
-        <div className="mobile-dock">
-          <div className="dock-item">
-            <Icon icon="mdi:phone" width="28" color="#34C759" />
-          </div>
-          <div
-            className="dock-item"
-            onClick={() => openLink("https://buariolatunji.netlify.app/")}
-          >
-            <Icon icon="mdi:safari" width="28" color="#1C9CF6" />
-          </div>
-          <div
-            className="dock-item"
-            onClick={() => openLink("https://medium.com/@olatunjibuari8")}
-          >
-            <Icon icon="mdi:post-outline" width="28" color="#1A9DFB" />
-          </div>
-          <div
-            className="dock-item"
-            onClick={() => openLink("https://github.com/softtunex")}
-          >
-            <Icon icon="mdi:github" width="28" color="#F57C00" />
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <div className="mobile-dock">
-          <div className="dock-item">
-            <Icon icon="mdi:phone" width="28" color="#3DDC84" />
-          </div>
-          <div
-            className="dock-item"
-            onClick={() => openLink("https://buariolatunji.netlify.app/")}
-          >
-            <Icon icon="mdi:google-chrome" width="28" color="#4285F4" />
-          </div>
-          <div
-            className="dock-item"
-            onClick={() => openLink("https://medium.com/@olatunjibuari8")}
-          >
-            <Icon icon="mdi:post-outline" width="28" color="#EA4335" />
-          </div>
-          <div
-            className="dock-item"
-            onClick={() => openLink("https://github.com/softtunex")}
-          >
-            <Icon icon="mdi:github" width="28" color="#FFFFFF" />
-          </div>
-        </div>
-      );
-    }
-  };
-
-  // Render "Made with React" badge
-  const renderMadeWithBadge = () => {
-    const badgeClass =
-      deviceType === "ios" ? "made-with-badge ios" : "made-with-badge android";
-    return (
-      <div className={badgeClass}>
-        <Icon
-          icon="simple-icons:react"
-          width="16"
-          style={{ marginRight: "6px" }}
-          color="#61DAFB"
-        />
-        <span>Made with React</span>
-      </div>
-    );
-  };
+  // Define dock items based on device type
+  const dockItems: DockItemProps[] = [
+    {
+      icon: deviceType === "ios" ? "mdi:phone" : "mdi:phone",
+      color: deviceType === "ios" ? "#34C759" : "#3DDC84",
+    },
+    {
+      icon: deviceType === "ios" ? "mdi:safari" : "mdi:google-chrome",
+      color: deviceType === "ios" ? "#1C9CF6" : "#4285F4",
+      onClick: () => openLink("https://buariolatunji.netlify.app/"),
+    },
+    {
+      icon: "mdi:post-outline",
+      color: deviceType === "ios" ? "#1A9DFB" : "#EA4335",
+      onClick: () => openLink("https://medium.com/@olatunjibuari8"),
+    },
+    {
+      icon: "mdi:github",
+      color: deviceType === "ios" ? undefined : "#FFFFFF",
+      onClick: () => openLink("https://github.com/softtunex"),
+    },
+  ];
 
   return (
     <div className={`mobile-interface ${deviceType}`}>
@@ -427,10 +453,37 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
         {deviceType === "ios" ? renderSafariInterface() : renderStatusBar()}
 
         {renderNotificationOverlay()}
-        {renderWeatherWidget()}
-        {renderAppGrid()}
-        {renderMobileDock()}
-        {renderMadeWithBadge()}
+        <MobileWeather deviceType={deviceType} weather={weather} />
+
+        <div className="app-grid">
+          {appIcons.map((app) => (
+            <MobileIcon
+              key={app.id}
+              id={app.id}
+              label={app.label}
+              icon={app.icon}
+              badge={app.badge}
+              color={app.color}
+              specialIcon={app.specialIcon}
+              avatar={app.avatar}
+              day={app.day}
+              text={app.text}
+              onClick={app.onClick}
+            />
+          ))}
+        </div>
+
+        <MobileDock deviceType={deviceType} dockItems={dockItems} />
+
+        <div className={`made-with-badge ${deviceType}`}>
+          <Icon
+            icon="simple-icons:react"
+            width="16"
+            style={{ marginRight: "6px" }}
+            color="#61DAFB"
+          />
+          <span>Made with React</span>
+        </div>
       </div>
     </div>
   );

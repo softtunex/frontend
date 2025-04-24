@@ -108,3 +108,81 @@ body {
   display: flex;
   overflow: hidden;
 }
+
+/* Add these styles to your App.css or create a new file */
+
+.help-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(30, 30, 40, 0.7);
+  backdrop-filter: blur(5px);
+  border: 2px solid rgba(52, 152, 219, 0.6);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  animation: float 2s infinite alternate;
+}
+
+.help-button:hover {
+  transform: scale(1.1);
+  background-color: rgba(52, 152, 219, 0.8);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: none;
+}
+
+/* Windows specific styling */
+.windows-desktop .help-button {
+  background-color: rgba(0, 120, 215, 0.7);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  bottom: 60px; /* Position above taskbar */
+}
+
+/* macOS specific styling */
+.mac-desktop .help-button {
+  background-color: rgba(0, 122, 255, 0.7);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  bottom: 110px; /* Position above dock */
+}
+
+/* Mobile specific styling */
+.mobile-interface .help-button {
+  width: 36px;
+  height: 36px;
+  bottom: 110px; /* Position above mobile dock */
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Small pulse animation to draw attention */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+  }
+}
+
+/* Add pulse animation on page load */
+.help-button-pulse {
+  animation: pulse 2s infinite;
+}

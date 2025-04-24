@@ -1,0 +1,254 @@
+/* UserGuide.css */
+.user-guide-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.user-guide-container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  background-color: rgba(30, 30, 40, 0.9);
+  backdrop-filter: blur(10px);
+  color: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  max-width: 500px;
+  width: 90%;
+  gap: 16px;
+  animation: pulseIn 0.4s ease-out;
+  transition: transform 0.3s ease-out;
+}
+
+@keyframes pulseIn {
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Position variants */
+.guide-position-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.guide-position-top {
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.guide-position-bottom {
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.guide-position-left {
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 400px;
+}
+
+.guide-position-right {
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 400px;
+}
+
+.guide-avatar-container {
+  flex-shrink: 0;
+}
+
+.guide-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #3498db;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.guide-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.guide-title {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #3498db;
+}
+
+.guide-text {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.guide-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.guide-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  background-color: rgba(52, 152, 219, 0.2);
+  border: 1px solid rgba(52, 152, 219, 0.5);
+  border-radius: 6px;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.guide-button:hover {
+  background-color: rgba(52, 152, 219, 0.4);
+}
+
+.guide-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.guide-button.next {
+  background-color: rgba(52, 152, 219, 0.7);
+}
+
+.guide-button.next:hover {
+  background-color: rgba(52, 152, 219, 0.9);
+}
+
+.guide-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.guide-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.guide-dot.active {
+  background-color: #3498db;
+}
+
+.guide-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.guide-close-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Highlighted elements */
+.guide-highlight {
+  position: relative;
+  z-index: 10001;
+  box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.8);
+  border-radius: 8px;
+  animation: highlight-pulse 1.5s infinite;
+  pointer-events: auto;
+}
+
+@keyframes highlight-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.8);
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 640px) {
+  .user-guide-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 16px;
+  }
+
+  .guide-avatar {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+  }
+
+  .guide-position-left,
+  .guide-position-right {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    max-width: 90%;
+  }
+
+  .guide-controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .guide-dots {
+    order: -1;
+    margin-bottom: 10px;
+  }
+
+  .guide-button {
+    width: 100%;
+    justify-content: center;
+  }
+}

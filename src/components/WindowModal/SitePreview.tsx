@@ -92,15 +92,15 @@ const WindowsListExplorer: React.FC<WindowsListExplorerProps> = ({
 
     switch (type) {
       case "portfolio":
-        return `${title.split(" ")[0]}_Portfolio`;
+        return `Olatunji_${title.split(" ")[0]}`;
       case "blog":
         return `${domain}-articles`;
       case "resume":
-        return `${title.split(" ")[0]}_Resume.pdf`;
+        return `Olatunji_${title.split(" ")[0]}.pdf`;
       case "github":
-        return `GitHub_${title.split(" ")[0]}`;
+        return `My_${title.split(" ")[0]}`;
       case "linkedin":
-        return `LinkedIn_Profile`;
+        return `My_LinkedIn`;
       default:
         return domain;
     }
