@@ -155,15 +155,6 @@
   color: #ffffff;
 }
 
-/* Enhanced App Grid */
-.mobile-interface .app-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 15px;
-  gap: 18px;
-  margin-top: 10px;
-}
 /* App Grid */
 .app-grid {
   display: grid;
@@ -174,7 +165,7 @@
 }
 
 /* Made with Flutter badge */
-.made-with-flutter {
+.made-with-badge {
   position: fixed;
   bottom: 120px;
   left: 50%;
@@ -192,57 +183,28 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
+.made-with-badge.ios {
+  bottom: 110px;
+}
+
+.made-with-badge.android {
+  bottom: 70px;
+}
+
 /* iOS Background */
 .mobile-interface.ios .mobile-background {
-  background-image: url("https://9to5mac.com/wp-content/uploads/sites/6/2022/06/iOS-16-wallpaper-dark.webp");
+  background-image: url("https://wallpapercave.com/wp/wp9764008.jpg");
   background-size: cover;
   background-position: center;
 }
 
-/* Fix Safari Bottom Bar */
-.safari-bottom-bar {
-  position: fixed;
-  bottom: 110px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-  background-color: rgba(240, 240, 240, 0.9);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  z-index: 900;
+/* Android Background */
+.mobile-interface.android .mobile-background {
+  background-image: url("https://wallpapercave.com/wp/wp9764008.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
-/* iOS Dock */
-.mobile-interface.ios .mobile-dock {
-  position: fixed;
-  bottom: 25px;
-  left: 15px;
-  right: 15px;
-  height: 80px;
-  background-color: rgba(200, 200, 220, 0.25);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border-radius: 30px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0 20px;
-  box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
-  z-index: 1000;
-}
-
-.mobile-interface.ios .dock-item {
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
 /* Enhanced App Icons */
 .app {
   width: 65px;
@@ -250,6 +212,12 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.app:active {
+  transform: scale(0.95);
 }
 
 .app-icon {
@@ -331,7 +299,6 @@
 }
 
 /* iOS Weather Widget */
-/* Weather Widget */
 .mobile-interface.ios .weather-widget.mobile {
   background-color: rgba(30, 100, 190, 0.8);
   backdrop-filter: blur(15px);
@@ -468,6 +435,12 @@
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.mobile-interface.ios .dock-item:active {
+  transform: scale(0.95);
 }
 
 /* Mobile Dock - Android */
@@ -494,75 +467,82 @@
   align-items: center;
   justify-content: center;
   opacity: 0.9;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.mobile-interface.android .dock-item:active {
+  transform: scale(0.9);
+}
+
+/* iPhone UI Specific Elements */
+.iphone-notch-area {
+  position: relative;
+  height: 44px;
+  z-index: 1100;
+}
+
+.iphone-status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 44px;
+  color: white;
+  font-size: 14px;
+}
+
+.iphone-time {
+  font-weight: 600;
+}
+
+.iphone-status-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.iphone-notch {
+  width: 180px;
+  height: 30px;
+  background-color: black;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1200;
 }
 
 /* Safari Bottom Bar (iOS only) */
-.safari-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: rgba(240, 240, 240, 0.9);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+.safari-bottom-bar {
   position: fixed;
-  bottom: 0;
+  bottom: 110px;
   left: 0;
   right: 0;
   height: 50px;
-  z-index: 900;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   padding: 0 15px;
+  background-color: rgba(240, 240, 240, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 900;
 }
 
-.safari-bar-item {
+.safari-bottom-item {
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #007aff;
+  cursor: pointer;
 }
 
-/* "Made with" Banner */
-.made-with.mobile {
-  position: fixed;
-  bottom: 120px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  color: white;
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  z-index: 890;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Background images matching the screenshots */
-.mobile-interface.ios {
-  background-color: #000;
-}
-
-.mobile-interface.ios .mobile-background {
-  background-image: url("https://9to5mac.com/wp-content/uploads/sites/6/2022/06/iOS-16-wallpaper-dark.webp");
-  background-size: cover;
-  background-position: center;
-}
-
-.mobile-interface.android {
-  background-color: #000;
-}
-
-.mobile-interface.android .mobile-background {
-  background-image: url("https://wallpapercave.com/wp/wp9764008.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-/* Responsive adjustments for better viewing on different devices */
+/* Responsive adjustments */
 @media (max-width: 480px) {
   .mobile-interface {
     width: 100%;
@@ -571,7 +551,7 @@
     box-shadow: none;
   }
 
-  .safari-bar {
+  .safari-bottom-bar {
     bottom: 0;
   }
 
@@ -579,8 +559,17 @@
     bottom: 70px;
   }
 
-  .made-with.mobile {
+  .made-with-badge {
     bottom: 160px;
+  }
+
+  .app-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  .app {
+    width: 100%;
   }
 }
 
@@ -589,11 +578,33 @@
     max-width: 360px;
     height: 90vh;
   }
+
+  .app-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 @media (min-width: 769px) {
   .mobile-interface {
     max-width: 400px;
     height: 85vh;
+  }
+}
+
+/* Fix for very small screens */
+@media (max-width: 320px) {
+  .app-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .app-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .app-label {
+    font-size: 10px;
   }
 }

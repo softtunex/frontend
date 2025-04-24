@@ -1,219 +1,80 @@
-/* src/components/ProjectModal/ProjectModal.css */
+/* ProjectModal.css - Clean modern style */
 
-/* Common base styles */
+/* Modal overlay and container - both OS types */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.modal-overlay.windows {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.modal-overlay.mac {
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .modal-container {
   position: relative;
-  width: 90%;
-  max-width: 900px;
-  max-height: 90vh;
+  width: 85%;
+  max-width: 1100px;
+  max-height: 85vh;
   overflow-y: auto;
-  color: #fff;
-}
-
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 400px;
-}
-
-/* Windows specific styles */
-.modal-overlay.windows {
-  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  transition: width 0.3s, max-width 0.3s, height 0.3s;
 }
 
 .modal-container.windows {
-  background-color: #1e1e1e;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  background-color: #1a1a1a;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
 }
 
+.modal-container.mac {
+  background-color: #1a1a1a;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  border: 1px solid #333;
+}
+
+/* Expanded container for details view */
+.modal-container-expanded {
+  width: 90%;
+  max-width: 1200px;
+}
+
+.modal-container-expanded .close-button.windows {
+  z-index: 100;
+}
+
+/* Window controls */
 .close-button.windows {
   position: absolute;
-  top: 15px;
+  top: 12px;
   right: 15px;
   background: transparent;
   border: none;
-  color: white;
-  font-size: 24px;
+  color: #ccc;
+  font-size: 22px;
   cursor: pointer;
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-}
-
-.loading-spinner.windows {
-  width: 40px;
-  height: 40px;
-  border: 4px solid rgba(255, 255, 255, 0.3);
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  border-top: 4px solid #0078d7;
-  animation: spin 1s linear infinite;
 }
 
-.modal-content.windows {
-  padding: 20px;
-}
-
-.featured-section.windows h2,
-.my-projects-section.windows h2 {
-  font-size: 28px;
-  font-weight: 600;
-  margin: 20px 0 8px 0;
-}
-
-.featured-section.windows hr,
-.my-projects-section.windows hr {
-  border: none;
-  height: 1px;
-  background-color: #333;
-  margin-bottom: 20px;
-}
-
-.featured-project.windows {
-  display: flex;
-  gap: 20px;
-}
-
-.project-info.windows {
-  flex: 1;
-}
-
-.project-info.windows h3 {
-  font-size: 24px;
-  font-weight: 600;
-  margin: 0 0 5px 0;
-}
-
-.category.windows {
-  color: #999;
-  font-size: 14px;
-  margin: 0 0 10px 0;
-}
-
-.description.windows {
-  margin-bottom: 20px;
-}
-
-.see-more-btn.windows {
-  background-color: #0078d7;
+.close-button.windows:hover {
+  background-color: rgba(255, 255, 255, 0.1);
   color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.project-preview.windows {
-  flex: 1.5;
-}
-
-.preview-image.windows {
-  height: 200px;
-  border-radius: 8px;
-  position: relative;
-  overflow: hidden;
-}
-
-.project-logo.windows {
-  font-size: 32px;
-  font-weight: 300;
-  opacity: 0.8;
-}
-
-.project-icon.windows {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 60px;
-  height: 60px;
-  background-color: #444;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.my-projects-section.windows {
-  margin-bottom: 20px;
-}
-
-.projects-grid.windows {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.project-item.windows {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  background-color: #262626;
-  padding: 12px;
-  border-radius: 8px;
-  transition: background-color 0.2s;
-}
-
-.project-item.windows:hover {
-  background-color: #333;
-  cursor: pointer;
-}
-
-.project-details.windows {
-  flex: 1;
-}
-
-.project-details.windows h4 {
-  font-size: 16px;
-  margin: 0 0 5px 0;
-}
-
-.project-details.windows p {
-  color: #999;
-  font-size: 14px;
-  margin: 0;
-}
-
-.project-thumbnail.windows {
-  flex: 2;
-  height: 120px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 8px;
-}
-
-/* macOS specific styles */
-.modal-overlay.mac {
-  background-color: rgba(0, 0, 0, 0.5);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
-    sans-serif;
-}
-
-.modal-container.mac {
-  background-color: #1e1e1e;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  border: 1px solid #3a3a3a;
-  display: flex;
-  flex-direction: column;
 }
 
 .mac-window-controls {
@@ -221,8 +82,7 @@
   align-items: center;
   gap: 8px;
   padding: 12px;
-  background-color: #1e1e1e;
-  border-bottom: 1px solid #3a3a3a;
+  background-color: transparent;
 }
 
 .mac-control {
@@ -244,7 +104,8 @@
   background-color: #27c93f;
 }
 
-.loading-container.mac {
+/* Loading states */
+.loading-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -252,14 +113,21 @@
   height: 400px;
 }
 
-.loading-spinner.mac {
+.loading-spinner {
   border: 2px solid transparent;
-  border-top: 2px solid #888;
   border-radius: 50%;
   width: 24px;
   height: 24px;
   animation: spin 1s linear infinite;
   margin-bottom: 16px;
+}
+
+.loading-spinner.windows {
+  border-top: 2px solid #0078d7;
+}
+
+.loading-spinner.mac {
+  border-top: 2px solid #888;
 }
 
 .loading-text.mac {
@@ -268,195 +136,231 @@
   letter-spacing: 1px;
 }
 
-.modal-content.mac {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px;
-}
-.projects-grid.mac {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
+/* Modal content */
+.modal-content {
+  padding: 20px 30px 30px;
+  color: white;
+  scrollbar-width: thin;
+  scrollbar-color: #555 #222;
+  scroll-behavior: smooth;
 }
 
-.project-item.mac {
-  display: flex;
-  flex-direction: column;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
-  background-color: #2a2a2a;
+.modal-content::-webkit-scrollbar {
+  width: 6px;
 }
 
-.project-item.mac:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-/* Keep the existing project item content styles */
-.project-item-content.mac {
-  display: flex;
-  padding: 15px;
-  align-items: center;
-  background-color: #2a2a2a;
+.modal-content::-webkit-scrollbar-track {
+  background: #222;
 }
 
-/* Responsive adjustments for Mac */
-@media (max-width: 768px) {
-  .projects-grid.mac {
-    grid-template-columns: 1fr;
-  }
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 3px;
 }
 
-.featured-section.mac h2,
-.my-projects-section.mac h2 {
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
+}
+
+/* Section headers */
+.featured-section h2,
+.my-projects-section h2 {
   font-size: 24px;
   font-weight: 500;
   margin: 10px 0 8px 0;
+  color: white;
 }
 
-.featured-section.mac hr,
-.my-projects-section.mac hr {
+.featured-section hr,
+.my-projects-section hr {
   border: none;
   height: 1px;
-  background-color: #333;
-  margin-bottom: 20px;
+  background-color: #444;
+  margin-bottom: 25px;
 }
 
-.featured-project.mac {
+/* Featured project */
+.featured-project {
   display: flex;
-  gap: 20px;
+  gap: 30px;
+  margin-bottom: 40px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: transparent;
+  border-radius: 12px;
+  padding: 0;
+  position: relative;
 }
 
-.project-info.mac {
-  flex: 1;
+.featured-project:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
-.project-info.mac h3 {
-  font-size: 24px;
+.project-info {
+  flex: 0.9;
+  padding: 20px 0;
+}
+
+.project-info h3 {
+  font-size: 28px;
   font-weight: 500;
   margin: 0 0 5px 0;
+  color: white;
 }
 
-.category.mac {
-  color: #999;
-  font-size: 14px;
-  margin: 0 0 10px 0;
+.category {
+  color: #aaa;
+  font-size: 15px;
+  margin: 0 0 15px 0;
 }
 
-.description.mac {
+.description {
   margin-bottom: 20px;
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #ddd;
 }
 
-.see-more-btn.mac {
-  background-color: #0077ed;
+.see-more-btn {
+  background-color: #333;
   color: white;
   border: none;
-  padding: 6px 14px;
-  border-radius: 5px;
-  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
   cursor: pointer;
-}
-
-.project-preview.mac {
-  flex: 1.5;
-}
-
-.preview-image.mac {
-  height: 200px;
-  border-radius: 8px;
+  transition: background-color 0.2s;
   position: relative;
+  z-index: 2;
+}
+
+.see-more-btn:hover {
+  background-color: #444;
+}
+
+.project-image {
+  flex: 1.2;
+  position: relative;
+}
+
+.project-image.windows {
+  height: 250px;
+  border-radius: 8px !important;
   overflow: hidden;
 }
 
-.project-logo.mac {
-  font-size: 32px;
-  font-weight: 300;
-  opacity: 0.8;
+.project-image.mac {
+  height: 250px;
+  border-radius: 12px !important;
+  overflow: hidden;
 }
 
-.project-icon.mac {
+/* Project logo in featured section */
+.project-logo-container {
   position: absolute;
   top: 15px;
   right: 15px;
-  width: 60px;
-  height: 60px;
-  background-color: #444;
+  width: 50px;
+  height: 50px;
+  background-color: white;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 2;
 }
 
-.projects-list.mac {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.project-logo-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
-.project-item.mac {
-  display: flex;
-  flex-direction: column;
-  border-radius: 8px;
-  overflow: hidden;
+/* Company sections */
+.company-section {
+  margin-bottom: 30px;
 }
 
-.project-item-content.mac {
-  display: flex;
-  padding: 15px;
-  align-items: center;
-  background-color: #2a2a2a;
+.company-name {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 20px 0 15px 0;
+  color: #aaa;
 }
 
-.project-icon-small.mac {
-  width: 45px;
-  height: 45px;
+/* Projects grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* Project card with horizontal layout */
+.project-item-card {
+  background-color: #252525;
   border-radius: 10px;
-  background-color: #444;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.project-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.project-item-header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  position: relative;
+  z-index: 2;
+}
+
+.project-item-logo {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  margin-right: 15px;
+  padding: 6px;
+  margin-right: 12px;
   flex-shrink: 0;
 }
 
-.project-details.mac {
+.project-logo-small {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.project-item-details {
   flex: 1;
 }
 
-.project-details.mac h4 {
+.project-item-details h4 {
   font-size: 16px;
   font-weight: 500;
-  margin: 0 0 4px 0;
+  margin: 0 0 5px 0;
+  color: white;
 }
 
-.project-details.mac p {
-  color: #999;
-  font-size: 13px;
+.project-item-details p {
+  color: #aaa;
+  font-size: 14px;
   margin: 0;
 }
 
-.see-btn.mac {
-  background-color: transparent;
-  color: #0077ed;
-  border: none;
-  padding: 5px 15px;
-  cursor: pointer;
-  font-size: 13px;
-  border-radius: 5px;
-  align-self: flex-end;
-  margin-left: auto;
-}
-
-.project-thumbnail.mac {
+.project-item-image {
   width: 100%;
-  height: 200px;
-  background-size: cover;
-  background-position: center;
+  height: 160px;
 }
 
 /* Animation */
@@ -469,194 +373,349 @@
   }
 }
 
+/* Windows specific style refinements */
+.windows .project-item-card {
+  background-color: #252525;
+}
+
+.windows .project-item-details h4 {
+  color: #fff;
+}
+
+/* Mac specific style refinements */
+.mac .project-item-card {
+  background-color: #252525;
+}
+
+.mac .project-item-details h4 {
+  color: #fff;
+}
+
 /* Responsive adjustments */
-@media (max-width: 768px) {
-  .featured-project.windows,
-  .featured-project.mac {
+@media (max-width: 900px) {
+  .featured-project {
     flex-direction: column;
+    gap: 20px;
   }
 
-  .projects-grid.windows {
-    grid-template-columns: 1fr;
+  .project-image {
+    height: 200px;
   }
 
-  .project-item.windows {
-    flex-direction: column;
-  }
-
-  .project-thumbnail.windows,
-  .project-thumbnail.mac {
-    height: 160px;
+  .projects-grid {
+    grid-template-columns: 1fr !important;
   }
 }
 
-/* Add these custom scrollbar styles to your existing ProjectModal.css */
-
-/* Custom scrollbar for modal content - both Windows and Mac */
-.modal-container.windows,
-.modal-container.mac,
-.modal-content.windows,
-.modal-content.mac {
-  /* Firefox scrollbar */
+/* Custom scrollbar */
+.modal-container {
   scrollbar-width: thin;
-  scrollbar-color: #666 #222;
+  scrollbar-color: #555 #222;
 }
 
-/* WebKit browsers (Chrome, Safari, newer Edge) */
-.modal-container.windows::-webkit-scrollbar,
-.modal-container.mac::-webkit-scrollbar,
-.modal-content.windows::-webkit-scrollbar,
-.modal-content.mac::-webkit-scrollbar {
-  width: 6px; /* Very thin scrollbar */
+.modal-container::-webkit-scrollbar {
+  width: 6px;
 }
 
-.modal-container.windows::-webkit-scrollbar-track,
-.modal-container.mac::-webkit-scrollbar-track,
-.modal-content.windows::-webkit-scrollbar-track,
-.modal-content.mac::-webkit-scrollbar-track {
-  background: #222; /* Dark background */
+.modal-container::-webkit-scrollbar-track {
+  background: #222;
+}
+
+.modal-container::-webkit-scrollbar-thumb {
+  background-color: #555;
   border-radius: 3px;
 }
 
-.modal-container.windows::-webkit-scrollbar-thumb,
-.modal-container.mac::-webkit-scrollbar-thumb,
-.modal-content.windows::-webkit-scrollbar-thumb,
-.modal-content.mac::-webkit-scrollbar-thumb {
-  background-color: #666; /* Grayish bar */
-  border-radius: 3px;
+.modal-container::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
 }
 
-.modal-container.windows::-webkit-scrollbar-thumb:hover,
-.modal-container.mac::-webkit-scrollbar-thumb:hover,
-.modal-content.windows::-webkit-scrollbar-thumb:hover,
-.modal-content.mac::-webkit-scrollbar-thumb:hover {
-  background-color: #888; /* Lighter when hovered */
-}
+/* Project Details Styles */
 
-/* Fix for overflow behavior in modal container */
-.modal-container.windows {
-  overflow: hidden;
-}
-
-.modal-content.windows {
+/* Base container */
+.project-details-container {
+  width: 100%;
+  height: 100%;
   overflow-y: auto;
-  max-height: calc(90vh - 40px);
+  color: #fff;
+  box-sizing: border-box;
 }
 
-.modal-container.mac {
-  overflow: hidden;
+/* Windows styling */
+.project-details-container.windows {
+  background-color: #1a1a1a;
+  padding: 20px 30px;
+  font-family: "Segoe UI", "Roboto", sans-serif;
 }
 
-.modal-content.mac {
-  overflow-y: auto;
-  max-height: calc(90vh - 40px);
-}
-
-/* ProjectModal isolation fixes - add this to your codebase */
-
-/* Isolate ProjectModal from Mac/Windows explorers by boosting specificity */
-.modal-overlay.windows,
-.modal-overlay.mac {
-  /* Ensure modal appears on top */
-  z-index: 9999 !important;
-  /* Prevent other components from affecting the modal background */
-  background-color: rgba(0, 0, 0, 0.7) !important;
-}
-
-/* Ensure modal container sits on top and has correct styling */
-.modal-container.windows,
-.modal-container.mac {
-  z-index: 10000 !important;
-  position: relative !important;
-}
-
-/* Prevent inheritance from Mac Finder styling */
-.mac-window-controls {
-  /* Reset any inherited properties */
-  background-color: #1e1e1e !important;
-  border-bottom: 1px solid #3a3a3a !important;
-  padding: 12px !important;
-}
-
-.mac-control {
-  /* Ensure control buttons display correctly */
-  width: 12px !important;
-  height: 12px !important;
-  border-radius: 50% !important;
-}
-
-.mac-control.close {
-  background-color: #ff5f56 !important;
-}
-.mac-control.minimize {
-  background-color: #ffbd2e !important;
-}
-.mac-control.expand {
-  background-color: #27c93f !important;
-}
-
-/* Fix styling for Windows modal components */
-.modal-content.windows {
-  padding: 20px !important;
-  background-color: #1e1e1e !important;
-}
-
-.close-button.windows {
-  z-index: 10001 !important; /* Ensure close button appears on top */
-  color: white !important;
-}
-
-/* Fix for project items */
-.project-item.windows,
-.project-item.mac {
-  /* Reset any unwanted properties */
-  display: flex !important;
-}
-
-.project-item.windows {
-  background-color: #262626 !important;
-}
-
-.project-item.mac {
-  background-color: #2a2a2a !important;
-}
-
-/* Ensure project grid layouts are maintained */
-.projects-grid.windows {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  gap: 20px !important;
-}
-
-.projects-grid.mac {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  gap: 15px !important;
-}
-
-/* Fix for specific project modal elements */
-.modal-content.windows h2,
-.modal-content.mac h2 {
-  color: white !important;
-}
-
-/* Fix scrolling */
-.modal-content.windows,
-.modal-content.mac {
-  overflow-y: auto !important;
-  max-height: calc(90vh - 40px) !important;
-}
-
-/* Re-apply correct font families */
-.modal-overlay.windows,
-.modal-container.windows,
-.modal-content.windows {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
-}
-
-.modal-overlay.mac,
-.modal-container.mac,
-.modal-content.mac {
+/* Mac styling */
+.project-details-container.mac {
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 20px 30px;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
-    sans-serif !important;
+    sans-serif;
+}
+
+/* Loading state */
+.project-details-loading {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+/* Back button */
+.project-details-header {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.back-button {
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  border: none;
+}
+
+.back-button.windows {
+  background-color: transparent;
+  color: #0078d7;
+  padding: 8px 12px;
+}
+
+.back-button.mac {
+  background-color: transparent;
+  color: #0071e3;
+  padding: 8px 0;
+  font-weight: 500;
+}
+
+.back-button:hover {
+  opacity: 0.9;
+}
+
+/* Project hero section */
+.project-hero {
+  margin-bottom: 40px;
+}
+
+.project-hero.windows {
+  /* background-color: #262626; */
+  border-radius: 8px;
+  padding: 30px;
+}
+
+.project-hero.mac {
+  background-color: #252525;
+  border-radius: 8px;
+  padding: 30px;
+}
+
+.project-hero-content {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.project-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.project-logo-container.windows,
+.project-logo-container.mac {
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.project-logo {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.project-hero-info {
+  flex: 1;
+}
+
+.project-title {
+  margin: 0 0 5px 0;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.project-subtitle {
+  color: #888;
+  margin: 0 0 16px 0;
+  font-size: 16px;
+}
+
+.project-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.project-category,
+.project-year,
+.project-role {
+  font-size: 14px;
+  padding: 4px 12px;
+  border-radius: 30px;
+  background-color: #333;
+  color: #ddd;
+}
+
+.project-website-button {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.project-website-button.windows {
+  background-color: #0078d7;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.project-website-button.windows:hover {
+  background-color: #0067b8;
+}
+
+.project-website-button.mac {
+  background-color: #0071e3;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.project-website-button.mac:hover {
+  background-color: #0060c9;
+}
+
+/* Section styles */
+.section-title {
+  margin: 0 0 16px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Screenshots gallery */
+.project-screenshots {
+  margin-bottom: 40px;
+}
+
+.screenshots-gallery {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: #333 #262626;
+}
+
+.screenshots-gallery::-webkit-scrollbar {
+  height: 6px;
+}
+
+.screenshots-gallery::-webkit-scrollbar-track {
+  background: #262626;
+}
+
+.screenshots-gallery::-webkit-scrollbar-thumb {
+  background-color: #333;
+  border-radius: 3px;
+}
+
+.screenshot-item {
+  flex: 0 0 auto;
+  width: 300px;
+  height: 180px;
+  background-color: #262626;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.screenshot-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.screenshot-item:hover img {
+  transform: scale(1.02);
+}
+
+/* Project description */
+.project-description {
+  margin-bottom: 40px;
+}
+
+.description-text {
+  line-height: 1.6;
+  color: #ddd;
+  font-size: 16px;
+}
+
+/* Technologies section */
+.project-technologies {
+  margin-bottom: 40px;
+}
+
+.technology-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.technology-tag {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #333;
+  color: #fff;
+}
+
+/* Features section */
+.project-features {
+  margin-bottom: 40px;
+}
+
+.features-list {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.feature-item {
+  margin-bottom: 10px;
+  line-height: 1.5;
+  color: #ddd;
+}
+
+/* Not found state */
+.project-not-found {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }

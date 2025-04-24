@@ -1,0 +1,438 @@
+/* ProjectDetails.css */
+
+/* Base container */
+.project-details-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+/* Windows styling */
+.project-details-container.windows {
+  background-color: #1a1a1a;
+  padding: 20px 30px;
+  font-family: "Segoe UI", "Roboto", sans-serif;
+}
+
+/* Mac styling */
+.project-details-container.mac {
+  background-color: #fff;
+  color: #333;
+  padding: 20px 30px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
+    sans-serif;
+}
+
+/* Loading state */
+.project-details-loading {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.loading-spinner {
+  border: 2px solid transparent;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+.loading-spinner.windows {
+  border-top: 2px solid #0078d7;
+}
+
+.loading-spinner.mac {
+  border-top: 2px solid #0071e3;
+}
+
+.loading-text {
+  font-size: 14px;
+  color: #888;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Back button */
+.project-details-header {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.back-button {
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  border: none;
+}
+
+.back-button.windows {
+  background-color: transparent;
+  color: #0078d7;
+  padding: 8px 12px;
+}
+
+.back-button.mac {
+  background-color: transparent;
+  color: #0071e3;
+  padding: 8px 0;
+  font-weight: 500;
+}
+
+.back-button:hover {
+  opacity: 0.9;
+}
+
+/* Project hero section */
+.project-hero {
+  margin-bottom: 40px;
+}
+
+.project-hero.windows {
+  background-color: #262626;
+  border-radius: 8px;
+  padding: 30px;
+}
+
+.project-hero.mac {
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.project-hero-content {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.project-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.project-logo-container.windows {
+  width: 100px;
+  height: 100px;
+  background-color: #333;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.project-logo-container.mac {
+  width: 120px;
+  height: 120px;
+  background-color: #f5f5f7;
+  border-radius: 24px;
+  padding: 20px;
+}
+
+.project-logo {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.project-hero-info {
+  flex: 1;
+}
+
+.project-title {
+  margin: 0 0 5px 0;
+}
+
+.project-title.windows {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.project-title.mac {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.project-subtitle {
+  color: #888;
+  margin: 0 0 16px 0;
+}
+
+.project-subtitle.windows {
+  font-size: 16px;
+}
+
+.project-subtitle.mac {
+  font-size: 18px;
+}
+
+.project-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.project-category,
+.project-year,
+.project-role {
+  font-size: 14px;
+  padding: 4px 12px;
+  border-radius: 30px;
+}
+
+.project-category.windows,
+.project-year.windows,
+.project-role.windows {
+  background-color: #333;
+  color: #ddd;
+}
+
+.project-category.mac,
+.project-year.mac,
+.project-role.mac {
+  background-color: #f5f5f7;
+  color: #666;
+}
+
+.project-website-button {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.project-website-button.windows {
+  background-color: #0078d7;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.project-website-button.windows:hover {
+  background-color: #0067b8;
+}
+
+.project-website-button.mac {
+  background-color: #0071e3;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.project-website-button.mac:hover {
+  background-color: #0060c9;
+}
+
+/* Section styles */
+.section-title {
+  margin: 0 0 16px 0;
+}
+
+.section-title.windows {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.section-title.mac {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Screenshots gallery */
+.project-screenshots {
+  margin-bottom: 40px;
+}
+
+.screenshots-gallery {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+}
+
+.screenshots-gallery.windows {
+  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: #333 #262626;
+}
+
+.screenshots-gallery.windows::-webkit-scrollbar {
+  height: 6px;
+}
+
+.screenshots-gallery.windows::-webkit-scrollbar-track {
+  background: #262626;
+}
+
+.screenshots-gallery.windows::-webkit-scrollbar-thumb {
+  background-color: #333;
+  border-radius: 3px;
+}
+
+.screenshots-gallery.mac {
+  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc #f5f5f7;
+}
+
+.screenshots-gallery.mac::-webkit-scrollbar {
+  height: 6px;
+}
+
+.screenshots-gallery.mac::-webkit-scrollbar-track {
+  background: #f5f5f7;
+}
+
+.screenshots-gallery.mac::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
+.screenshot-item {
+  flex: 0 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.screenshot-item.windows {
+  width: 300px;
+  height: 180px;
+  background-color: #262626;
+}
+
+.screenshot-item.mac {
+  width: 300px;
+  height: 180px;
+  background-color: #f5f5f7;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.screenshot-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.screenshot-item:hover img {
+  transform: scale(1.02);
+}
+
+/* Project description */
+.project-description {
+  margin-bottom: 40px;
+}
+
+.description-text {
+  line-height: 1.6;
+}
+
+.description-text.windows {
+  color: #ddd;
+  font-size: 16px;
+}
+
+.description-text.mac {
+  color: #444;
+  font-size: 16px;
+}
+
+/* Technologies section */
+.project-technologies {
+  margin-bottom: 40px;
+}
+
+.technology-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.technology-tag {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.technology-tag.windows {
+  background-color: #333;
+  color: #fff;
+}
+
+.technology-tag.mac {
+  background-color: #f5f5f7;
+  color: #333;
+}
+
+/* Features section */
+.project-features {
+  margin-bottom: 40px;
+}
+
+.features-list {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.feature-item {
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.feature-item.windows {
+  color: #ddd;
+}
+
+.feature-item.mac {
+  color: #444;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .project-hero-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .project-logo-container {
+    margin-bottom: 20px;
+  }
+
+  .screenshots-gallery {
+    gap: 12px;
+  }
+
+  .screenshot-item.windows,
+  .screenshot-item.mac {
+    width: 250px;
+    height: 150px;
+  }
+}
+
+/* Not found state */
+.project-not-found {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
