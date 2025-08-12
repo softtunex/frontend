@@ -56,7 +56,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
           bgColor: "#D32F2F",
         });
 
-        // Set the projects list - organized by company
+        // Set the projects list - organized by company in the requested order
         setMyProjects([
           // Danval Technologies
           {
@@ -69,68 +69,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
             imageUrl:
               "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744233065/Screenshot_2025-04-09_215933_q3a4my.png",
             bgColor: "#D32F2F",
-          },
-
-          // Norak Technology
-          {
-            id: "acadasuite",
-            name: "Acadasuite",
-            company: "Norak Technology",
-            category: "Educational Platform",
-            logoUrl:
-              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744108356/acadasuite-logo_f9jd5m.png",
-            imageUrl:
-              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744283198/Screenshot_2025-04-10_115715_fl1dk8.png",
-            bgColor: "#1976D2",
-          },
-
-          // First Ally Asset Management
-          {
-            id: "myinvester-website",
-            name: "MyInvestar Website",
-            company: "First Ally Asset Management",
-            category: "Fintech",
-            logoUrl:
-              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744108356/myinvestar-logo_k9cyej.png",
-            imageUrl:
-              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744283711/Screenshot_2025-04-10_121309_cbo6su.png",
-            bgColor: "#0288D1",
-          },
-
-          {
-            id: "myinvester-admin",
-            name: "MyInvestar Admin",
-            company: "First Ally Asset Management",
-            category: "Fintech Administration",
-            logoUrl:
-              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744108356/myinvestar-logo_k9cyej.png",
-            imageUrl:
-              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744283912/Screenshot_2025-04-10_121734_nij8xd.png",
-            bgColor: "#00ACC1",
-          },
-
-          {
-            id: "faam-website",
-            name: "FAAM Website",
-            company: "First Ally Asset Management",
-            category: "Corporate Website",
-            logoUrl:
-              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744108356/faam-logo_cwylfy.png",
-            imageUrl:
-              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744284157/Screenshot_2025-04-10_122104_dzujhf.png",
-            bgColor: "#00796B",
-          },
-
-          {
-            id: "first-ally-mfb",
-            name: "First Ally MFB",
-            company: "First Ally Asset Management",
-            category: "Banking",
-            logoUrl:
-              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744108356/firstally-logo_nxwjhr.png",
-            imageUrl:
-              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744284906/Screenshot_2025-04-10_123411_ysillh.png",
-            bgColor: "#388E3C",
           },
 
           // Sidmach Technologies
@@ -193,6 +131,68 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
               "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744108356/performance_iwvbff.jpg",
             bgColor: "#7B1FA2",
           },
+
+          // First Ally Asset Management
+          {
+            id: "myinvester-website",
+            name: "MyInvestar Website",
+            company: "First Ally Asset Management",
+            category: "Fintech",
+            logoUrl:
+              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744108356/myinvestar-logo_k9cyej.png",
+            imageUrl:
+              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744283711/Screenshot_2025-04-10_121309_cbo6su.png",
+            bgColor: "#0288D1",
+          },
+
+          {
+            id: "myinvester-admin",
+            name: "MyInvestar Admin",
+            company: "First Ally Asset Management",
+            category: "Fintech Administration",
+            logoUrl:
+              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744108356/myinvestar-logo_k9cyej.png",
+            imageUrl:
+              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744283912/Screenshot_2025-04-10_121734_nij8xd.png",
+            bgColor: "#00ACC1",
+          },
+
+          {
+            id: "faam-website",
+            name: "FAAM Website",
+            company: "First Ally Asset Management",
+            category: "Corporate Website",
+            logoUrl:
+              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744108356/faam-logo_cwylfy.png",
+            imageUrl:
+              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744284157/Screenshot_2025-04-10_122104_dzujhf.png",
+            bgColor: "#00796B",
+          },
+
+          {
+            id: "first-ally-mfb",
+            name: "First Ally MFB",
+            company: "First Ally Asset Management",
+            category: "Banking",
+            logoUrl:
+              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744108356/firstally-logo_nxwjhr.png",
+            imageUrl:
+              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744284906/Screenshot_2025-04-10_123411_ysillh.png",
+            bgColor: "#388E3C",
+          },
+
+          // Norak Technology
+          {
+            id: "acadasuite",
+            name: "Acadasuite",
+            company: "Norak Technology",
+            category: "Educational Platform",
+            logoUrl:
+              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744108356/acadasuite-logo_f9jd5m.png",
+            imageUrl:
+              "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744283198/Screenshot_2025-04-10_115715_fl1dk8.png",
+            bgColor: "#1976D2",
+          },
         ]);
 
         setLoading(false);
@@ -230,15 +230,34 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
     );
   }
 
-  // Function to group projects by company
+  // Function to group projects by company and maintain order
   const groupProjectsByCompany = () => {
+    const companyOrder = [
+      "Danval Technologies Ltd",
+      "Sidmach Technologies Ltd",
+      "First Ally Asset Management",
+      "Norak Technology",
+    ];
+
     const companies: Record<string, Project[]> = {};
 
+    // Initialize companies in order
+    companyOrder.forEach((company) => {
+      companies[company] = [];
+    });
+
+    // Group projects by company
     myProjects.forEach((project) => {
-      if (!companies[project.company]) {
-        companies[project.company] = [];
+      if (companies[project.company]) {
+        companies[project.company].push(project);
       }
-      companies[project.company].push(project);
+    });
+
+    // Remove empty company groups
+    Object.keys(companies).forEach((company) => {
+      if (companies[company].length === 0) {
+        delete companies[company];
+      }
     });
 
     return companies;

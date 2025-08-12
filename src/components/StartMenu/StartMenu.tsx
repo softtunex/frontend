@@ -111,13 +111,13 @@ const StartMenu: React.FC<StartMenuProps> = ({
             <div className="info-row">
               <div className="info-label">Phone</div>
               <div className="info-value">
-                {userInfo.phone || "+234 123 456 7890"}
+                {userInfo.phone || "+234 8062387436"}
               </div>
             </div>
             <div className="info-row">
               <div className="info-label">Email</div>
               <div className="info-value">
-                {userInfo.email || "olatunjibuari8@gmail.com"}
+                {userInfo.email || "buariolatunji@gmail.com.com"}
               </div>
             </div>
             <div className="info-row">
