@@ -77,7 +77,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
             "Customer loyalty program integration",
             "Mobile-responsive design for all devices",
           ],
-          website: "https://area56restaurant.com",
+          website: "https://areafiftysix.com/?location_id=4&number=AS16",
         },
         acadasuite: {
           id: "acadasuite",
@@ -115,7 +115,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
             "Communication portal for students, parents, and teachers",
             "Resource sharing and assignment submission",
           ],
-          website: "https://acadasuite.com",
+          website: "https://acadasuite.com/",
         },
         "myinvester-website": {
           id: "myinvester-website",
@@ -153,7 +153,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
             "Document management for investments",
             "Investment performance analytics",
           ],
-          website: "https://myinvestar.com",
+          website: "https://myinvestar.ng/",
         },
         "myinvester-admin": {
           id: "myinvester-admin",
@@ -191,7 +191,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
             "Customer support ticketing system",
             "Audit logging and compliance tools",
           ],
-          website: "https://admin.myinvestar.com",
+          // No website for admin dashboard - company sensitive
         },
         "faam-website": {
           id: "faam-website",
@@ -226,7 +226,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
             "Service details and pricing",
             "Contact form and location map",
           ],
-          website: "https://firstallyassetmanagement.com",
+          website: "http://first-allyproperties.com/",
         },
         "first-ally-mfb": {
           id: "first-ally-mfb",
@@ -261,7 +261,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
             "Branch location map",
             "FAQ accordion section",
           ],
-          website: "https://firstallymfb.com",
+          website: "http://first-allymfb.com/",
         },
         "waec-hris": {
           id: "waec-hris",
@@ -297,7 +297,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
             "Payroll processing integration",
             "Customizable reporting dashboard",
           ],
-          website: "https://waec-hris.org",
+          // No public website - internal WAEC system
         },
         youthplus: {
           id: "youthplus",
@@ -334,7 +334,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
             "Learning resources and courses",
             "Event discovery and registration",
           ],
-          website: "https://youthplus.org",
+          website: "https://apps.youthplus.ng/",
         },
         "youthplus-admin": {
           id: "youthplus-admin",
@@ -372,7 +372,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
             "Event administration",
             "System configuration and settings",
           ],
-          website: "https://admin.youthplus.org",
+          // No website for admin dashboard - company sensitive
         },
         "approval-flow": {
           id: "approval-flow",
@@ -409,7 +409,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
             "Approval history and audit trail",
             "Dashboard with pending approvals and status tracking",
           ],
-          website: "https://internal.sidmach.com/approvals",
+          // No website for internal system - company sensitive
         },
         "appraisal-system": {
           id: "appraisal-system",
@@ -445,7 +445,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
             "Evaluation forms and templates",
             "Performance history and reporting",
           ],
-          website: "https://internal.sidmach.com/appraisal",
+          // No website for internal system - company sensitive
         },
       };
 
@@ -516,6 +516,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
                 <span className={`project-role ${osType}`}>{project.role}</span>
               )}
             </div>
+            {/* Only show website button if website exists (not for admin dashboards) */}
             {project.website && (
               <a
                 href={project.website}

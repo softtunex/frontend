@@ -590,7 +590,7 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
       id: "mail",
       icon: "mdi:email",
       color: "#1A9DFB",
-      onClick: () => openLink("mailto:olatunjibuari8@gmail.com"),
+      onClick: () => openLink("mailto:buariolatunji@gmail.com"),
     },
     {
       id: "projects",
@@ -781,8 +781,8 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
                   {currentWeather.condition === "Clear"
                     ? "Sunny"
                     : currentWeather.condition === "Clouds"
-                    ? "Partly Cloudy"
-                    : currentWeather.condition}
+                      ? "Partly Cloudy"
+                      : currentWeather.condition}
                 </span>
               </>
             )}

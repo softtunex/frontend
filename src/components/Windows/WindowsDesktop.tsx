@@ -58,14 +58,17 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
     title: "Senior Frontend Engineer",
     avatar:
       "https://res.cloudinary.com/duwdwr0r9/image/upload/v1743427116/sticker_qg5max.png",
-    phone: "+234 123 456 7890",
-    email: "olatunjibuari8@gmail.com",
+    phone: "+2348062387436",
+    email: "buariolatunji@gmail.com",
     website: "https://buariolatunji.netlify.app/",
-    experience: "3+ years",
+    experience: "4+ years",
     skills: [
       "JavaScript",
       "TypeScript",
       "React",
+      "React Native",
+      "Flutter",
+      "Next.js",
       "Node.js",
       "Express",
       "MongoDB",
@@ -83,6 +86,39 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
     hour: "2-digit",
     minute: "2-digit",
   });
+
+  // Define taskbar items - similar to Mac dock items
+  const taskbarItems = [
+    {
+      id: "start",
+      icon: "mdi:microsoft-windows",
+      color: "#1E90FF",
+      onClick: () => setShowStartMenu(!showStartMenu),
+    },
+    {
+      id: "user",
+      avatar: userInfo.avatar,
+      onClick: () => handleOpenWindow("portfolio"),
+    },
+    {
+      id: "projects",
+      icon: "logos:javascript",
+      badge: "8+",
+      onClick: () => handleOpenProjectModal("projects"),
+    },
+    {
+      id: "email",
+      icon: "mdi:email",
+      color: "#4DB6E5",
+      onClick: () => window.open(`mailto:${userInfo.email}`, "_blank"),
+    },
+    {
+      id: "calendar",
+      icon: "mdi:calendar",
+      color: "#4DB6E5",
+      onClick: () => window.open("https://calendar.google.com", "_blank"),
+    },
+  ];
 
   // Detect clicks outside the start menu to close it
   useEffect(() => {
@@ -585,36 +621,35 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
             )}
           </div>
 
-          {/* Taskbar icons - centered with icons from the original design */}
+          {/* Taskbar icons - centered with proper click handlers */}
           <div className="taskbar-icons">
-            <div className="taskbar-icon">
-              <Icon
-                onClick={() => setShowStartMenu(!showStartMenu)}
-                icon="mdi:microsoft-windows"
-                width="22"
-                color="#1E90FF"
-              />
-            </div>
-            <div className="taskbar-icon">
-              <img
-                src={userInfo.avatar}
-                alt="User"
-                className="dock-avatar"
-                style={{
-                  width: "36px",
-                  height: "36px",
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                }}
-              />
-            </div>
-            <div
-              className="taskbar-icon badge-container"
-              onClick={() => handleOpenProjectModal("projects")}
-            >
-              <Icon icon="logos:javascript" width="22" />
-              <div className="taskbar-badge">8+</div>
-            </div>
+            {/* Static taskbar items with proper onClick handlers */}
+            {taskbarItems.map((item) => (
+              <div
+                key={item.id}
+                className={`taskbar-icon ${item.badge ? "badge-container" : ""}`}
+                onClick={item.onClick}
+              >
+                {item.avatar ? (
+                  <img
+                    src={item.avatar}
+                    alt="User"
+                    className="dock-avatar"
+                    style={{
+                      width: "36px",
+                      height: "36px",
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                    }}
+                  />
+                ) : (
+                  <Icon icon={item.icon || ""} width="22" color={item.color} />
+                )}
+                {item.badge && (
+                  <div className="taskbar-badge">{item.badge}</div>
+                )}
+              </div>
+            ))}
 
             {/* Add the minimized windows to the taskbar */}
             {windows.map((window) => (
@@ -641,13 +676,6 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
                 )}
               </div>
             ))}
-
-            <div className="taskbar-icon">
-              <Icon icon="mdi:email" width="22" color="#4DB6E5" />
-            </div>
-            <div className="taskbar-icon">
-              <Icon icon="mdi:calendar" width="22" color="#4DB6E5" />
-            </div>
           </div>
 
           {/* Right side of taskbar */}
