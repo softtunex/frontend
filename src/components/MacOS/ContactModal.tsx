@@ -1,7 +1,9 @@
+// Updated ContactModal.tsx
 import React from "react";
 import { Icon } from "@iconify/react";
 import "./Mac.css";
 
+// Create a ContactInfo interface based on UserInfo
 interface ContactInfo {
   name: string;
   title: string;
@@ -14,7 +16,7 @@ interface ContactInfo {
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
-  contactInfo: ContactInfo;
+  contactInfo: ContactInfo; // This will receive the shared config from parent
   onAboutMeClick: () => void;
 }
 

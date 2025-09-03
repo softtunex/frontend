@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import "./Mobile.css";
+import { LINKS, openExternalLink } from "../../shared/linksConfig";
+import { useTheme } from "../../hooks/useTheme";
+import { colors } from "../../shared/themeConfig";
 
 interface AppIconProps {
   id: number;
@@ -59,6 +62,7 @@ const MobileIcon: React.FC<AppIconProps> = ({
   text,
   onClick,
 }) => {
+  const theme = useTheme();
   return (
     <div className="app" onClick={onClick}>
       {specialIcon === "calendar" ? (
@@ -82,14 +86,20 @@ const MobileIcon: React.FC<AppIconProps> = ({
               alt={label}
               className="icon-avatar"
               style={{
-                width: "36px",
-                height: "36px",
+                width: `${theme.getIconSize("desktop")}px`,
+                height: `${theme.getIconSize("desktop")}px`,
                 borderRadius: "50%",
                 objectFit: "cover",
               }}
             />
           ) : (
-            icon && <Icon icon={icon} width="28" color={color} />
+            icon && (
+              <Icon
+                icon={icon}
+                width={theme.getIconSize("large")}
+                color={color}
+              />
+            )
           )}
         </div>
       )}
@@ -144,6 +154,8 @@ const MobileWeather: React.FC<{
   deviceType: "ios" | "android";
   weather: MobileInterfaceProps["weather"];
 }> = ({ deviceType, weather }) => {
+  const theme = useTheme();
+
   if (deviceType === "ios") {
     // iOS style horizontal forecast
     return (
@@ -155,7 +167,7 @@ const MobileWeather: React.FC<{
               <div className="icon">
                 <Icon
                   icon={getWeatherIcon(day.condition)}
-                  width="22"
+                  width={theme.getIconSize("medium")}
                   color="white"
                 />
               </div>
@@ -246,11 +258,6 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
     }
   };
 
-  // Function to open link in a new tab
-  const openLink = (url: string) => {
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
-
   // Function to handle notifications
   const renderNotificationOverlay = () => {
     if (showNotification) {
@@ -329,25 +336,22 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
       icon: "logos:javascript",
       badge: "8+",
       color: "#54C5F8",
-      onClick: () => openLink("https://github.com/softtunex"),
+      onClick: () => openExternalLink(LINKS.GITHUB),
     },
     {
       id: 2,
       label: "Blog",
       icon: "mdi:post-outline",
       badge: "3",
-      color: "#44a8b3",
-      onClick: () => openLink("https://medium.com/@olatunjibuari8"),
+      color: colors.projects.blog,
+      onClick: () => openExternalLink(LINKS.MEDIUM),
     },
     {
       id: 3,
       label: "Résumé",
       icon: "mdi:file-pdf-box",
-      color: "#f40f02",
-      onClick: () =>
-        openLink(
-          "https://drive.google.com/file/d/1b-5QtzA8b3ywoA6G-1wH8yajuekJtM3x/view"
-        ),
+      color: colors.projects.resume,
+      onClick: () => openExternalLink(LINKS.RESUME),
     },
     {
       id: 4,
@@ -355,30 +359,29 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
       icon: "mdi:github",
       badge: "10+",
       color: undefined,
-      onClick: () => openLink("https://github.com/softtunex"),
+      onClick: () => openExternalLink(LINKS.GITHUB),
     },
     {
       id: 5,
       label: "LinkedIn",
       icon: "mdi:linkedin",
       badge: "4K+",
-      color: "#0A66C2",
-      onClick: () =>
-        openLink("https://www.linkedin.com/in/olatunji-buari-a87031190/"),
+      color: colors.projects.linkedin,
+      onClick: () => openExternalLink(LINKS.LINKEDIN),
     },
     {
       id: 6,
       label: "Calendar",
       specialIcon: "calendar",
       day: day,
-      onClick: () => openLink("https://calendly.com/olatunjibuari8/30min"),
+      onClick: () => openExternalLink(LINKS.CALENDAR),
     },
     {
       id: 7,
       label: "Portfolio",
       icon: "mdi:web",
-      color: "#1877f2",
-      onClick: () => openLink("https://buariolatunji.netlify.app/"),
+      color: colors.projects.portfolio,
+      onClick: () => openExternalLink(LINKS.PORTFOLIO),
     },
     {
       id: 8,
@@ -406,21 +409,22 @@ const MobileInterface: React.FC<MobileInterfaceProps> = ({
     {
       icon: deviceType === "ios" ? "mdi:phone" : "mdi:phone",
       color: deviceType === "ios" ? "#34C759" : "#3DDC84",
+      onClick: () => window.open(LINKS.PHONE),
     },
     {
       icon: deviceType === "ios" ? "mdi:safari" : "mdi:google-chrome",
       color: deviceType === "ios" ? "#1C9CF6" : "#4285F4",
-      onClick: () => openLink("https://buariolatunji.netlify.app/"),
+      onClick: () => openExternalLink(LINKS.PORTFOLIO),
     },
     {
       icon: "mdi:post-outline",
       color: deviceType === "ios" ? "#1A9DFB" : "#EA4335",
-      onClick: () => openLink("https://medium.com/@olatunjibuari8"),
+      onClick: () => openExternalLink(LINKS.MEDIUM),
     },
     {
       icon: "mdi:github",
       color: deviceType === "ios" ? undefined : "#FFFFFF",
-      onClick: () => openLink("https://github.com/softtunex"),
+      onClick: () => openExternalLink(LINKS.GITHUB),
     },
   ];
 

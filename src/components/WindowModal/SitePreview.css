@@ -396,7 +396,7 @@
 }
 
 .windows-list-explorer.portfolio .file-entry:hover {
-  border-left-color: #1877f2;
+  border-left-color: var(--color-project-portfolio);
 }
 
 .windows-list-explorer.blog .file-entry {
@@ -404,7 +404,7 @@
 }
 
 .windows-list-explorer.blog .file-entry:hover {
-  border-left-color: #44a8b3;
+  border-left-color: var(--color-project-blog);
 }
 
 .windows-list-explorer.resume .file-entry {
@@ -412,7 +412,7 @@
 }
 
 .windows-list-explorer.resume .file-entry:hover {
-  border-left-color: #f40f02;
+  border-left-color: var(--color-project-resume);
 }
 
 .windows-list-explorer.github .file-entry {

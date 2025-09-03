@@ -4,8 +4,9 @@
   height: 100%;
   width: 100%;
   background-color: #333333;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
   color: #e8e8e8;
   overflow: hidden;
 }
@@ -268,7 +269,9 @@
   border: 1px solid #151515;
   overflow: hidden;
   cursor: pointer;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
 }
 
 .mac-finder-gallery-item:hover {
@@ -556,15 +559,15 @@
 
 /* Type-specific styling */
 .mac-finder.portfolio .mac-finder-path-item.current {
-  color: #1877f2;
+  color: var(--color-project-portfolio);
 }
 
 .mac-finder.blog .mac-finder-path-item.current {
-  color: #44a8b3;
+  color: var(--color-project-blog);
 }
 
 .mac-finder.resume .mac-finder-path-item.current {
-  color: #f40f02;
+  color: var(--color-project-resume);
 }
 
 .mac-finder.github .mac-finder-path-item.current {
