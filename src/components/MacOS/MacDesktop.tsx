@@ -7,6 +7,10 @@ import MacFinder from "./MacFinder";
 import MenuDropdown from "./MenuDropdown";
 import AboutMeModal from "./AboutMeModal";
 import ContactModal from "./ContactModal";
+import { userConfig, getContactInfo } from "../../shared/userConfig";
+import { useTheme } from "../../hooks/useTheme";
+import { colors } from "../../shared/themeConfig";
+import { LINKS } from "../../shared/linksConfig";
 
 // Define a Window object type
 interface WindowObject {
@@ -38,6 +42,7 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
   weather,
   onSwitchToWindows,
 }) => {
+  const theme = useTheme();
   const [showNotification, setShowNotification] = useState(true);
   const [currentWeather, setCurrentWeather] = useState(weather);
   const [isLoading, setIsLoading] = useState(false);
@@ -72,28 +77,7 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
 
   // Add contact info
 
-  // User information to display in the about me modal
-  const userInfo = {
-    name: "Olatunji Buari",
-    title: "Senior Frontend Engineer",
-    avatar:
-      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1743427116/sticker_qg5max.png",
-    experience: "3+ years",
-    skills: [
-      "JavaScript",
-      "TypeScript",
-      "React",
-      "Node.js",
-      "Express",
-      "Firebase",
-      "MongoDB",
-      "REST",
-      "HTML",
-      "CSS",
-      "CI/CD",
-      "Git",
-    ],
-  };
+  const userInfo = userConfig;
 
   const currentDate = new Date();
   const time = currentDate.toLocaleTimeString([], {
@@ -220,8 +204,8 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
 
     const defaultOptions = {
       iconColor: undefined,
-      initialWidth: 900,
-      initialHeight: 600,
+      initialWidth: theme.getWindowDimensions("default").width,
+      initialHeight: theme.getWindowDimensions("default").height,
       initialX: randomX,
       initialY: randomY,
     };
@@ -377,12 +361,16 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
           createMacFinder(
             "Portfolio - Olatunji Buari",
             "A showcase of my work, skills, and experience as a Senior Frontend Engineer with expertise in React, TypeScript, and modern web development.",
-            "https://buariolatunji.netlify.app/",
+            LINKS.PORTFOLIO,
             "mdi:web",
             "portfolio",
-            "#1877f2"
+            colors.projects.portfolio
           ),
-          { iconColor: "#1877f2", initialWidth: 900, initialHeight: 600 }
+          {
+            iconColor: colors.projects.portfolio,
+            initialWidth: theme.getWindowDimensions("default").width,
+            initialHeight: theme.getWindowDimensions("default").height,
+          }
         );
         break;
       case "blog":
@@ -393,12 +381,16 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
           createMacFinder(
             "Medium Blog",
             "Read my articles on web development, frontend technologies, and software engineering best practices.",
-            "https://medium.com/@olatunjibuari8",
+            LINKS.MEDIUM,
             "mdi:post-outline",
             "blog",
-            "#44a8b3"
+            colors.projects.blog
           ),
-          { iconColor: "#44a8b3", initialWidth: 900, initialHeight: 600 }
+          {
+            iconColor: colors.projects.blog,
+            initialWidth: theme.getWindowDimensions("default").width,
+            initialHeight: theme.getWindowDimensions("default").height,
+          }
         );
         break;
       case "resume":
@@ -409,12 +401,16 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
           createMacFinder(
             "Professional Résumé",
             "View my full professional résumé including my experience, skills, education, and achievements.",
-            "https://drive.google.com/file/d/1b-5QtzA8b3ywoA6G-1wH8yajuekJtM3x/view",
+            LINKS.RESUME,
             "mdi:file-pdf-box",
             "resume",
-            "#f40f02"
+            colors.projects.resume
           ),
-          { iconColor: "#f40f02", initialWidth: 900, initialHeight: 600 }
+          {
+            iconColor: colors.projects.resume,
+            initialWidth: theme.getWindowDimensions("default").width,
+            initialHeight: theme.getWindowDimensions("default").height,
+          }
         );
         break;
       case "github":
@@ -425,11 +421,14 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
           createMacFinder(
             "GitHub Profile",
             "Browse my open-source projects, contributions, and code repositories on GitHub.",
-            "https://github.com/softtunex",
+            LINKS.GITHUB,
             "mdi:github",
             "github"
           ),
-          { initialWidth: 900, initialHeight: 600 }
+          {
+            initialWidth: theme.getWindowDimensions("default").width,
+            initialHeight: theme.getWindowDimensions("default").height,
+          }
         );
         break;
       case "linkedin":
@@ -440,12 +439,16 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
           createMacFinder(
             "LinkedIn Profile",
             "Connect with me professionally and explore my work history, recommendations, and professional network.",
-            "https://www.linkedin.com/in/olatunji-buari-a87031190/",
+            LINKS.LINKEDIN,
             "mdi:linkedin",
             "linkedin",
-            "#0A66C2"
+            colors.projects.linkedin
           ),
-          { iconColor: "#0A66C2", initialWidth: 900, initialHeight: 600 }
+          {
+            iconColor: colors.projects.linkedin,
+            initialWidth: theme.getWindowDimensions("default").width,
+            initialHeight: theme.getWindowDimensions("default").height,
+          }
         );
         break;
       case "fullscreen":
@@ -463,14 +466,7 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
   const openLink = (url: string) => {
     window.open(url, "_blank", "noopener,noreferrer");
   };
-  const contactInfo = {
-    name: userInfo.name,
-    title: userInfo.title,
-    avatar: userInfo.avatar,
-    phone: "+123 456 7890",
-    email: "your.email@example.com",
-    website: "https://yourwebsite.com",
-  };
+  const contactInfo = getContactInfo();
 
   // Function to toggle menu dropdown
   const handleAppleMenuClick = (event: React.MouseEvent) => {
@@ -500,7 +496,7 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
         handleOpenProjectModal("projects");
         break;
       case "buy-me-coffee":
-        window.open("https://www.buymeacoffee.com/yourname", "_blank");
+        window.open(LINKS.BUY_ME_COFFEE, "_blank");
         break;
       default:
         break;
@@ -521,7 +517,7 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
       id: 2,
       label: "Portfolio",
       avatar: userInfo.avatar,
-      color: "#1877f2",
+      color: colors.projects.portfolio,
       onClick: () => handleOpenWindow("portfolio"),
     },
     {
@@ -529,7 +525,7 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
       label: "Blog",
       icon: "mdi:post-outline",
       badge: "3",
-      color: "#44a8b3",
+      color: colors.projects.blog,
       onClick: () => handleOpenWindow("blog"),
     },
     {
@@ -543,7 +539,7 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
       id: 5,
       label: "Résumé",
       icon: "mdi:file-pdf-box",
-      color: "#f40f02",
+      color: colors.projects.resume,
       onClick: () => handleOpenWindow("resume"),
     },
     {
@@ -559,7 +555,7 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
       label: "LinkedIn",
       icon: "mdi:linkedin",
       badge: "4K+",
-      color: "#0A66C2",
+      color: colors.projects.linkedin,
       onClick: () => handleOpenWindow("linkedin"),
     },
     {
@@ -576,21 +572,21 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
     {
       id: "finder",
       icon: "mdi:folder",
-      color: "#1D93EF",
+      color: colors.platforms.mac.accent,
       onClick: () => {},
     },
     {
       id: "portfolio",
       avatar: userInfo.avatar,
-      color: "#1C9CF6",
+      color: colors.platforms.mac.accent,
       onClick: () => handleOpenWindow("portfolio"),
       isOpen: windows.some((w) => w.id === "portfolio" && !w.isMinimized),
     },
     {
       id: "mail",
       icon: "mdi:email",
-      color: "#1A9DFB",
-      onClick: () => openLink("mailto:buariolatunji@gmail.com"),
+      color: colors.platforms.mac.accent,
+      onClick: () => openLink(LINKS.EMAIL),
     },
     {
       id: "projects",
@@ -601,7 +597,7 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
     {
       id: "user",
       icon: "mdi:account-circle",
-      color: "#F57C00",
+      color: colors.platforms.mac.accent,
       onClick: () => setShowAboutMe(true),
     },
   ];
@@ -612,7 +608,7 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
         <div className="menu-bar">
           <div className="menu-bar-left">
             <div className="apple-logo" onClick={handleAppleMenuClick}>
-              <Icon icon="mdi:apple" width="18" />
+              <Icon icon="mdi:apple" width={theme.getIconSize("small")} />
             </div>
             <div className="menu-item">Finder</div>
             <div className="menu-item" onClick={() => setShowAboutMe(true)}>
@@ -630,10 +626,10 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
           </div>
           <div className="menu-bar-right">
             <div className="menu-item">
-              <Icon icon="mdi:wifi" width="18" />
+              <Icon icon="mdi:wifi" width={theme.getIconSize("small")} />
             </div>
             <div className="menu-item">
-              <Icon icon="mdi:battery" width="18" />
+              <Icon icon="mdi:battery" width={theme.getIconSize("small")} />
             </div>
             <div className="menu-item">EN</div>
             <div className="menu-item">{`${formattedDate} ${time}`}</div>
@@ -684,8 +680,8 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
                       alt="User"
                       className="dock-avatar"
                       style={{
-                        width: "36px",
-                        height: "36px",
+                        width: `${theme.getIconSize("desktop")}px`,
+                        height: `${theme.getIconSize("desktop")}px`,
                         borderRadius: "50%",
                         objectFit: "cover",
                       }}
@@ -693,11 +689,11 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
                   ) : (
                     <Icon
                       icon={icon.icon || ""}
-                      width="28"
+                      width={theme.getIconSize("large")}
                       color={icon.color}
                     />
                   )}
-                  {/* <Icon icon={icon.icon} width="28" color={icon.color} /> */}
+                  {/* <Icon icon={icon.icon} width={theme.getIconSize('large')} color={icon.color} /> */}
                 </div>
                 <div className="icon-label">{icon.label}</div>
               </div>
@@ -814,14 +810,18 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
                   alt="User"
                   className="dock-avatar"
                   style={{
-                    width: "36px",
-                    height: "36px",
+                    width: `${theme.getIconSize("desktop")}px`,
+                    height: `${theme.getIconSize("desktop")}px`,
                     borderRadius: "50%",
                     objectFit: "cover",
                   }}
                 />
               ) : (
-                <Icon icon={item.icon || ""} width="28" color={item.color} />
+                <Icon
+                  icon={item.icon || ""}
+                  width={theme.getIconSize("large")}
+                  color={item.color}
+                />
               )}
               {/* Indicator for open windows */}
               {windows.some((w) => w.id === item.id && !w.isMinimized) && (
@@ -846,7 +846,7 @@ const MacDesktop: React.FC<MacDesktopProps> = ({
                 >
                   <Icon
                     icon={window.icon}
-                    width="28"
+                    width={theme.getIconSize("large")}
                     color={window.iconColor}
                   />
                   {!window.isMinimized && <div className="dock-dot"></div>}

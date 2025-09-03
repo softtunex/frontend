@@ -1,0 +1,297 @@
+/* src/styles/theme.css - CSS Custom Properties from Theme Config */
+
+:root {
+  /* Project Colors */
+  --color-project-portfolio: #1877f2;
+  --color-project-blog: #44a8b3;
+  --color-project-resume: #f40f02;
+  --color-project-github: #333333;
+  --color-project-linkedin: #0a66c2;
+  --color-project-restaurant: #d32f2f;
+  --color-project-education: #1976d2;
+  --color-project-fintech: #0288d1;
+  --color-project-banking: #388e3c;
+  --color-project-hr: #689f38;
+  --color-project-social: #afb42b;
+  --color-project-business: #512da8;
+
+  /* Platform Colors - Windows */
+  --color-windows-primary: #0078d7;
+  --color-windows-accent: #1e90ff;
+  --color-windows-taskbar: #0d1117;
+  --color-windows-background: #f0f0f0;
+
+  /* Platform Colors - Mac */
+  --color-mac-primary: #007aff;
+  --color-mac-accent: #1d93ef;
+  --color-mac-menubar: rgba(20, 20, 70, 0.5);
+  --color-mac-background: #f5f5f7;
+
+  /* Platform Colors - iOS */
+  --color-ios-primary: #007aff;
+  --color-ios-accent: #1c9cf6;
+  --color-ios-statusbar: transparent;
+
+  /* Platform Colors - Android */
+  --color-android-primary: #4285f4;
+  --color-android-accent: #3ddc84;
+  --color-android-statusbar: rgba(0, 0, 0, 0.8);
+
+  /* Badge Colors */
+  --color-badge-default: #e44d26;
+  --color-badge-new: #4caf50;
+  --color-badge-error: #f44336;
+  --color-badge-warning: #ff9800;
+  --color-badge-success: #4caf50;
+
+  /* System Colors */
+  --color-background: #ffffff;
+  --color-surface: #f8f9fa;
+  --color-primary: #007bff;
+  --color-secondary: #6c757d;
+  --color-accent: #17a2b8;
+  --color-text-primary: #212529;
+  --color-text-secondary: #6c757d;
+  --color-text-inverse: #ffffff;
+  --color-text-disabled: #adb5bd;
+  --color-border: #dee2e6;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-overlay: rgba(0, 0, 0, 0.5);
+
+  /* Spacing Scale */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+
+  /* Border Radius Scale */
+  --radius-none: 0px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Component Heights */
+  --height-menubar: 24px;
+  --height-taskbar: 40px;
+  --height-dock: 80px;
+  --height-statusbar-ios: 44px;
+  --height-statusbar-android: 28px;
+  --height-titlebar-windows: 32px;
+  --height-titlebar-mac: 38px;
+
+  /* Icon Sizes */
+  --icon-small: 16px;
+  --icon-medium: 24px;
+  --icon-large: 32px;
+  --icon-desktop: 50px;
+  --icon-dock: 60px;
+
+  /* Shadows */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-md: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  --shadow-xl: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  --shadow-window: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --shadow-modal: 0 10px 25px rgba(0, 0, 0, 0.5);
+  --shadow-dock: 0 5px 20px rgba(0, 0, 0, 0.2);
+
+  /* Z-Index Scale */
+  --z-base: 0;
+  --z-content: 10;
+  --z-header: 100;
+  --z-modal: 1000;
+  --z-overlay: 1001;
+  --z-dropdown: 1002;
+  --z-tooltip: 1003;
+  --z-notification: 1004;
+  --z-maximum: 9999;
+
+  /* Animation Durations */
+  --duration-fast: 150ms;
+  --duration-medium: 300ms;
+  --duration-slow: 500ms;
+  --duration-window-open: 200ms;
+  --duration-window-close: 150ms;
+  --duration-window-minimize: 200ms;
+  --duration-window-maximize: 200ms;
+
+  /* Animation Easings */
+  --easing-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --easing-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --easing-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* Window Dimensions */
+  --window-default-width: 800px;
+  --window-default-height: 600px;
+  --window-minimum-width: 400px;
+  --window-minimum-height: 300px;
+  --window-maximum-width: 1200px;
+  --window-maximum-height: 800px;
+}
+
+/* Breakpoints as CSS classes for conditional styling */
+@media (max-width: 320px) {
+  .mobile-small-only {
+    display: block;
+  }
+  .mobile-medium-up,
+  .tablet-up,
+  .desktop-up {
+    display: none;
+  }
+}
+
+@media (min-width: 321px) and (max-width: 480px) {
+  .mobile-medium-only {
+    display: block;
+  }
+  .mobile-small-only,
+  .tablet-up,
+  .desktop-up {
+    display: none;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .mobile-large-only {
+    display: block;
+  }
+  .mobile-small-only,
+  .mobile-medium-only,
+  .desktop-up {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .tablet-up {
+    display: block;
+  }
+  .mobile-small-only,
+  .mobile-medium-only,
+  .mobile-large-only {
+    display: none;
+  }
+}
+
+@media (min-width: 1025px) {
+  .desktop-up {
+    display: block;
+  }
+  .tablet-only {
+    display: none;
+  }
+}
+
+/* Utility classes using theme variables */
+.theme-project-portfolio {
+  color: var(--color-project-portfolio);
+}
+.theme-project-blog {
+  color: var(--color-project-blog);
+}
+.theme-project-resume {
+  color: var(--color-project-resume);
+}
+.theme-project-github {
+  color: var(--color-project-github);
+}
+.theme-project-linkedin {
+  color: var(--color-project-linkedin);
+}
+
+.bg-theme-project-portfolio {
+  background-color: var(--color-project-portfolio);
+}
+.bg-theme-project-blog {
+  background-color: var(--color-project-blog);
+}
+.bg-theme-project-resume {
+  background-color: var(--color-project-resume);
+}
+.bg-theme-project-github {
+  background-color: var(--color-project-github);
+}
+.bg-theme-project-linkedin {
+  background-color: var(--color-project-linkedin);
+}
+
+/* Spacing utilities */
+.p-xs {
+  padding: var(--spacing-xs);
+}
+.p-sm {
+  padding: var(--spacing-sm);
+}
+.p-md {
+  padding: var(--spacing-md);
+}
+.p-lg {
+  padding: var(--spacing-lg);
+}
+.p-xl {
+  padding: var(--spacing-xl);
+}
+
+.m-xs {
+  margin: var(--spacing-xs);
+}
+.m-sm {
+  margin: var(--spacing-sm);
+}
+.m-md {
+  margin: var(--spacing-md);
+}
+.m-lg {
+  margin: var(--spacing-lg);
+}
+.m-xl {
+  margin: var(--spacing-xl);
+}
+
+/* Border radius utilities */
+.rounded-sm {
+  border-radius: var(--radius-sm);
+}
+.rounded-md {
+  border-radius: var(--radius-md);
+}
+.rounded-lg {
+  border-radius: var(--radius-lg);
+}
+.rounded-xl {
+  border-radius: var(--radius-xl);
+}
+.rounded-full {
+  border-radius: var(--radius-full);
+}
+
+/* Shadow utilities */
+.shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+.shadow-xl {
+  box-shadow: var(--shadow-xl);
+}
+.shadow-window {
+  box-shadow: var(--shadow-window);
+}
+.shadow-modal {
+  box-shadow: var(--shadow-modal);
+}
+.shadow-dock {
+  box-shadow: var(--shadow-dock);
+}

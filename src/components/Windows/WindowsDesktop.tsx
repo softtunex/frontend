@@ -5,6 +5,10 @@ import Window from "../WindowModal/Window";
 import ProjectModal from "../ProjectModal/ProjectModal";
 import StartMenu from "../StartMenu/StartMenu";
 import WindowsListExplorer from "../WindowModal/SitePreview";
+import { userConfig } from "../../shared/userConfig";
+import { useTheme } from "../../hooks/useTheme"; // Import the hook
+import { colors } from "../../shared/themeConfig"; // Import colors directly
+import { LINKS } from "../../shared/linksConfig";
 
 // Define a Window object type
 interface WindowObject {
@@ -36,6 +40,7 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
   weather,
   onSwitchToMac,
 }) => {
+  const theme = useTheme();
   const [currentWeather, setCurrentWeather] = useState(weather);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -52,34 +57,7 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
   // Windows state
   const [windows, setWindows] = useState<WindowObject[]>([]);
 
-  // User information to display in the start menu
-  const userInfo = {
-    name: "Olatunji Buari",
-    title: "Senior Frontend Engineer",
-    avatar:
-      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1743427116/sticker_qg5max.png",
-    phone: "+2348062387436",
-    email: "buariolatunji@gmail.com",
-    website: "https://buariolatunji.netlify.app/",
-    experience: "4+ years",
-    skills: [
-      "JavaScript",
-      "TypeScript",
-      "React",
-      "React Native",
-      "Flutter",
-      "Next.js",
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "Firebase",
-      "HTML",
-      "CSS",
-      "CI/CD",
-      "REST",
-      "Git",
-    ],
-  };
+  const userInfo = userConfig;
 
   const currentDate = new Date();
   const time = currentDate.toLocaleTimeString([], {
@@ -92,7 +70,7 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
     {
       id: "start",
       icon: "mdi:microsoft-windows",
-      color: "#1E90FF",
+      color: colors.platforms.windows.primary, // Use theme color
       onClick: () => setShowStartMenu(!showStartMenu),
     },
     {
@@ -109,13 +87,13 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
     {
       id: "email",
       icon: "mdi:email",
-      color: "#4DB6E5",
+      color: colors.platforms.windows.accent, // Use theme color
       onClick: () => window.open(`mailto:${userInfo.email}`, "_blank"),
     },
     {
       id: "calendar",
       icon: "mdi:calendar",
-      color: "#4DB6E5",
+      color: colors.platforms.windows.accent, // Use theme color
       onClick: () => window.open("https://calendar.google.com", "_blank"),
     },
   ];
@@ -214,8 +192,8 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
 
     const defaultOptions = {
       iconColor: undefined,
-      initialWidth: 800,
-      initialHeight: 600,
+      initialWidth: theme.getWindowDimensions("default").width,
+      initialHeight: theme.getWindowDimensions("default").height,
       initialX: randomX,
       initialY: randomY,
     };
@@ -380,12 +358,16 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
           createWindowsListExplorer(
             "Portfolio - Olatunji Buari",
             "A showcase of my work, skills, and experience as a Senior Frontend Engineer with expertise in React, TypeScript, and modern web development.",
-            "https://buariolatunji.netlify.app/",
+            LINKS.PORTFOLIO,
             "mdi:web",
             "portfolio",
-            "#1877f2"
+            colors.projects.portfolio
           ),
-          { iconColor: "#1877f2", initialWidth: 900, initialHeight: 600 }
+          {
+            iconColor: colors.projects.portfolio,
+            initialWidth: theme.getWindowDimensions("default").width,
+            initialHeight: theme.getWindowDimensions("default").height,
+          }
         );
         break;
       case "blog":
@@ -396,12 +378,16 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
           createWindowsListExplorer(
             "Medium Blog",
             "Read my articles on web development, frontend technologies, and software engineering best practices.",
-            "https://medium.com/@olatunjibuari8",
+            LINKS.MEDIUM,
             "mdi:post-outline",
             "blog",
-            "#44a8b3"
+            colors.projects.blog
           ),
-          { iconColor: "#44a8b3", initialWidth: 900, initialHeight: 600 }
+          {
+            iconColor: colors.projects.blog,
+            initialWidth: theme.getWindowDimensions("default").width,
+            initialHeight: theme.getWindowDimensions("default").height,
+          }
         );
         break;
       case "resume":
@@ -412,12 +398,16 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
           createWindowsListExplorer(
             "Professional Résumé",
             "View my full professional résumé including my experience, skills, education, and achievements.",
-            "https://drive.google.com/file/d/1b-5QtzA8b3ywoA6G-1wH8yajuekJtM3x/view",
+            LINKS.RESUME,
             "mdi:file-pdf-box",
             "resume",
-            "#f40f02"
+            colors.projects.resume
           ),
-          { iconColor: "#f40f02", initialWidth: 900, initialHeight: 600 }
+          {
+            iconColor: colors.projects.resume,
+            initialWidth: theme.getWindowDimensions("default").width,
+            initialHeight: theme.getWindowDimensions("default").height,
+          }
         );
         break;
       case "github":
@@ -428,11 +418,14 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
           createWindowsListExplorer(
             "GitHub Profile",
             "Browse my open-source projects, contributions, and code repositories on GitHub.",
-            "https://github.com/softtunex",
+            LINKS.GITHUB,
             "mdi:github",
             "github"
           ),
-          { initialWidth: 900, initialHeight: 600 }
+          {
+            initialWidth: theme.getWindowDimensions("default").width,
+            initialHeight: theme.getWindowDimensions("default").height,
+          }
         );
         break;
       case "linkedin":
@@ -443,12 +436,16 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
           createWindowsListExplorer(
             "LinkedIn Profile",
             "Connect with me professionally and explore my work history, recommendations, and professional network.",
-            "https://www.linkedin.com/in/olatunji-buari-a87031190/",
+            LINKS.LINKEDIN,
             "mdi:linkedin",
             "linkedin",
-            "#0A66C2"
+            colors.projects.linkedin
           ),
-          { iconColor: "#0A66C2", initialWidth: 900, initialHeight: 600 }
+          {
+            iconColor: colors.projects.linkedin,
+            initialWidth: theme.getWindowDimensions("default").width,
+            initialHeight: theme.getWindowDimensions("default").height,
+          }
         );
         break;
       case "fullscreen":
@@ -470,14 +467,13 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
       icon: "logos:javascript",
       badge: "8+",
       color: undefined,
-      onClick: () => handleOpenProjectModal("projects"), // Original functionality
+      onClick: () => handleOpenProjectModal("projects"),
     },
     {
       id: 2,
       label: "Portfolio",
-      avatar:
-        "https://res.cloudinary.com/duwdwr0r9/image/upload/v1743427116/sticker_qg5max.png",
-      color: "#1877f2",
+      avatar: userInfo.avatar,
+      color: colors.projects.portfolio, // Use theme color
       onClick: () => handleOpenWindow("portfolio"),
     },
     {
@@ -485,7 +481,7 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
       label: "Blog",
       icon: "mdi:post-outline",
       badge: "3",
-      color: "#44a8b3",
+      color: colors.projects.blog, // Use theme color
       onClick: () => handleOpenWindow("blog"),
     },
     {
@@ -499,7 +495,7 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
       id: 5,
       label: "Résumé",
       icon: "mdi:file-pdf-box",
-      color: "#f40f02",
+      color: colors.projects.resume, // Use theme color
       onClick: () => handleOpenWindow("resume"),
     },
     {
@@ -507,7 +503,7 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
       label: "Github",
       icon: "mdi:github",
       badge: "10+",
-      color: undefined,
+      color: colors.projects.github, // Use theme color
       onClick: () => handleOpenWindow("github"),
     },
     {
@@ -515,7 +511,7 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
       label: "LinkedIn",
       icon: "mdi:linkedin",
       badge: "4K+",
-      color: "#0A66C2",
+      color: colors.projects.linkedin, // Use theme color
       onClick: () => handleOpenWindow("linkedin"),
     },
     {
@@ -542,8 +538,8 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
                       alt="User"
                       className="dock-avatar"
                       style={{
-                        width: "36px",
-                        height: "36px",
+                        width: `${theme.getIconSize("desktop")}px`, // Use theme size
+                        height: `${theme.getIconSize("desktop")}px`, // Use theme size
                         borderRadius: "50%",
                         objectFit: "cover",
                       }}
@@ -551,7 +547,7 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
                   ) : (
                     <Icon
                       icon={icon.icon || ""}
-                      width="28"
+                      width={theme.getIconSize("large")}
                       color={icon.color}
                     />
                   )}
@@ -636,14 +632,18 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
                     alt="User"
                     className="dock-avatar"
                     style={{
-                      width: "36px",
-                      height: "36px",
+                      width: `${theme.getIconSize("desktop")}px`,
+                      height: `${theme.getIconSize("desktop")}px`,
                       borderRadius: "50%",
                       objectFit: "cover",
                     }}
                   />
                 ) : (
-                  <Icon icon={item.icon || ""} width="22" color={item.color} />
+                  <Icon
+                    icon={item.icon || ""}
+                    width={theme.getIconSize("medium")}
+                    color={item.color}
+                  />
                 )}
                 {item.badge && (
                   <div className="taskbar-badge">{item.badge}</div>
@@ -670,7 +670,11 @@ const WindowsDesktop: React.FC<WindowsDesktopProps> = ({
                       : "flex",
                 }}
               >
-                <Icon icon={window.icon} width="22" color={window.iconColor} />
+                <Icon
+                  icon={window.icon}
+                  width={theme.getIconSize("medium")}
+                  color={window.iconColor}
+                />
                 {window.isActive && !window.isMinimized && (
                   <div className="taskbar-indicator"></div>
                 )}

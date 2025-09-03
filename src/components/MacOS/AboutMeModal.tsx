@@ -1,18 +1,12 @@
+// Updated AboutMeModal.tsx
 import React from "react";
 import "./Mac.css";
-
-interface UserInfo {
-  name: string;
-  title: string;
-  avatar: string;
-  experience: string;
-  skills: string[];
-}
+import { UserInfo } from "../../shared/userConfig"; // Import type
 
 interface AboutMeModalProps {
   isOpen: boolean;
   onClose: () => void;
-  userInfo: UserInfo;
+  userInfo: UserInfo; // This will receive the shared config from parent
   onProjectsClick: () => void;
   onContactClick: () => void;
 }

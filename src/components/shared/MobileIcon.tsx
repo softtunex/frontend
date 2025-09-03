@@ -1,6 +1,7 @@
 // src/components/shared/MobileIcon.tsx
 import React from "react";
 import { Icon } from "@iconify/react";
+import { useTheme } from "../../hooks/useTheme";
 
 interface MobileIconProps {
   id: number;
@@ -29,6 +30,7 @@ const MobileIcon: React.FC<MobileIconProps> = ({
   text,
   onClick,
 }) => {
+  const theme = useTheme();
   return (
     <div className="app" onClick={onClick}>
       {specialIcon === "calendar" ? (
@@ -52,8 +54,8 @@ const MobileIcon: React.FC<MobileIconProps> = ({
               alt={label}
               className="icon-avatar"
               style={{
-                width: "36px",
-                height: "36px",
+                width: `${theme.getIconSize("desktop")}px`,
+                height: `${theme.getIconSize("desktop")}px`,
                 borderRadius: "50%",
                 objectFit: "cover",
               }}

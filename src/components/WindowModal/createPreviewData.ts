@@ -1,5 +1,7 @@
 // This file contains the data for different site previews
 
+import { colors } from "../../shared/themeConfig";
+
 // Helper function to create folder and file data
 const createPreviewData = (type: any) => {
   // Common files
@@ -13,10 +15,26 @@ const createPreviewData = (type: any) => {
     case "portfolio":
       return {
         folders: [
-          { name: "Projects", icon: "mdi:folder-open", color: "#1877f2" },
-          { name: "Skills", icon: "mdi:folder-star", color: "#1877f2" },
-          { name: "Education", icon: "mdi:folder-account", color: "#1877f2" },
-          { name: "Contact", icon: "mdi:folder-phone", color: "#1877f2" },
+          {
+            name: "Projects",
+            icon: "mdi:folder-open",
+            color: colors.projects.portfolio,
+          },
+          {
+            name: "Skills",
+            icon: "mdi:folder-star",
+            color: colors.projects.portfolio,
+          },
+          {
+            name: "Education",
+            icon: "mdi:folder-account",
+            color: colors.projects.portfolio,
+          },
+          {
+            name: "Contact",
+            icon: "mdi:folder-phone",
+            color: colors.projects.portfolio,
+          },
         ],
         files: [
           ...commonFiles,
@@ -62,10 +80,26 @@ const createPreviewData = (type: any) => {
     case "blog":
       return {
         folders: [
-          { name: "Posts", icon: "mdi:folder-text", color: "#44a8b3" },
-          { name: "Drafts", icon: "mdi:folder-edit", color: "#44a8b3" },
-          { name: "Images", icon: "mdi:folder-image", color: "#44a8b3" },
-          { name: "Categories", icon: "mdi:folder-table", color: "#44a8b3" },
+          {
+            name: "Posts",
+            icon: "mdi:folder-text",
+            color: colors.projects.blog,
+          },
+          {
+            name: "Drafts",
+            icon: "mdi:folder-edit",
+            color: colors.projects.blog,
+          },
+          {
+            name: "Images",
+            icon: "mdi:folder-image",
+            color: colors.projects.blog,
+          },
+          {
+            name: "Categories",
+            icon: "mdi:folder-table",
+            color: colors.projects.blog,
+          },
         ],
         files: [
           ...commonFiles,
@@ -105,10 +139,26 @@ const createPreviewData = (type: any) => {
     case "resume":
       return {
         folders: [
-          { name: "Experience", icon: "mdi:folder-clock", color: "#f40f02" },
-          { name: "Skills", icon: "mdi:folder-star", color: "#f40f02" },
-          { name: "Education", icon: "mdi:folder-account", color: "#f40f02" },
-          { name: "Certificates", icon: "mdi:folder-key", color: "#f40f02" },
+          {
+            name: "Experience",
+            icon: "mdi:folder-clock",
+            color: colors.projects.resume,
+          },
+          {
+            name: "Skills",
+            icon: "mdi:folder-star",
+            color: colors.projects.resume,
+          },
+          {
+            name: "Education",
+            icon: "mdi:folder-account",
+            color: colors.projects.resume,
+          },
+          {
+            name: "Certificates",
+            icon: "mdi:folder-key",
+            color: colors.projects.resume,
+          },
         ],
         files: [
           ...commonFiles,
@@ -207,10 +257,26 @@ const createPreviewData = (type: any) => {
     case "linkedin":
       return {
         folders: [
-          { name: "Profile", icon: "mdi:account", color: "#0A66C2" },
-          { name: "Connections", icon: "mdi:account-group", color: "#0A66C2" },
-          { name: "Recommendations", icon: "mdi:thumb-up", color: "#0A66C2" },
-          { name: "Jobs", icon: "mdi:briefcase", color: "#0A66C2" },
+          {
+            name: "Profile",
+            icon: "mdi:account",
+            color: colors.projects.linkedin,
+          },
+          {
+            name: "Connections",
+            icon: "mdi:account-group",
+            color: colors.projects.linkedin,
+          },
+          {
+            name: "Recommendations",
+            icon: "mdi:thumb-up",
+            color: colors.projects.linkedin,
+          },
+          {
+            name: "Jobs",
+            icon: "mdi:briefcase",
+            color: colors.projects.linkedin,
+          },
         ],
         files: [
           ...commonFiles,

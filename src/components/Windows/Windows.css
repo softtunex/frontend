@@ -102,12 +102,12 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 40px;
-  background-color: #0d1117;
+  height: var(--height-taskbar);
+  background-color: var(--color-windows-taskbar);
   display: flex;
   align-items: center;
   padding: 0;
-  z-index: 1000;
+  z-index: var(--z-header);
 }
 
 /* Start Button */
@@ -334,7 +334,7 @@
   height: 120px;
   border-radius: 60px;
   object-fit: cover;
-  border: 3px solid #1877f2;
+  border: 3px solid var(--color-project-portfolio);
 }
 
 .portfolio-header h1 {
@@ -423,7 +423,7 @@
 }
 
 .resume-section h3 {
-  border-bottom: 2px solid #f40f02;
+  border-bottom: 2px solid var(--color-project-resume);
   padding-bottom: 8px;
   margin-bottom: 16px;
 }

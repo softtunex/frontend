@@ -1,6 +1,7 @@
 // src/components/shared/MobileWeather.tsx
 import React from "react";
 import { Icon } from "@iconify/react";
+import { useTheme } from "../../hooks/useTheme";
 
 interface WeatherData {
   temperature: number;
@@ -37,6 +38,8 @@ const MobileWeather: React.FC<{
 }> = ({ deviceType, weather }) => {
   if (deviceType === "ios") {
     // iOS style horizontal forecast
+    const theme = useTheme();
+
     return (
       <div className="weather-widget mobile">
         <div className="forecast">
@@ -46,7 +49,7 @@ const MobileWeather: React.FC<{
               <div className="icon">
                 <Icon
                   icon={getWeatherIcon(day.condition)}
-                  width="22"
+                  width={theme.getIconSize("medium")}
                   color="white"
                 />
               </div>

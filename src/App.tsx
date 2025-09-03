@@ -1,22 +1,18 @@
-// Add this to your App.tsx file
-
+// Updated App.tsx
 import React, { useEffect, useState } from "react";
 import { detectDevice, DeviceType } from "./deviceDetection";
 import WindowsDesktop from "./components/Windows/WindowsDesktop";
 import MacDesktop from "./components/MacOS/MacDesktop";
 import MobileInterface from "./components/Mobile/MobileInterface";
-import UserGuide from "./components/UserGuide/UserGuide"; // Import the UserGuide component
-import { Icon } from "@iconify/react"; // Import Icon component
+import UserGuide from "./components/UserGuide/UserGuide";
+import { Icon } from "@iconify/react";
+import { avatar } from "./shared/userConfig";
 import "./App.css";
 import "./Responsive.css";
 
 const App: React.FC = () => {
   const [deviceType, setDeviceType] = useState<DeviceType>("unknown");
   const [showGuide, setShowGuide] = useState(false);
-
-  // Avatar URL - ensure this is the correct path
-  const avatarUrl =
-    "https://res.cloudinary.com/duwdwr0r9/image/upload/v1743427116/sticker_qg5max.png";
 
   // Weather data
   const weather = {
@@ -35,14 +31,11 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    // Detect the device type on mount
     const detected = detectDevice();
     setDeviceType(detected);
 
-    // Check if user guide has been shown before
     const guideShown = localStorage.getItem("portfolioGuideShown");
     if (guideShown !== "true") {
-      // Wait a moment before showing the guide to let the interface load
       const timer = setTimeout(() => {
         setShowGuide(true);
       }, 1500);
@@ -51,7 +44,6 @@ const App: React.FC = () => {
     }
   }, []);
 
-  // Switch handlers
   const switchToMac = () => {
     setDeviceType("macos");
   };
@@ -60,12 +52,10 @@ const App: React.FC = () => {
     setDeviceType("windows");
   };
 
-  // Handler for guide close
   const handleGuideClose = () => {
     setShowGuide(false);
   };
 
-  // Add the help button to reopen guide
   const renderHelpButton = () => {
     return (
       <button
@@ -105,16 +95,14 @@ const App: React.FC = () => {
         </div>
       )}
 
-      {/* Add the UserGuide component */}
       {showGuide && (
         <UserGuide
           deviceType={deviceType}
           onClose={handleGuideClose}
-          avatarUrl={avatarUrl}
+          avatarUrl={avatar} // Use shared config
         />
       )}
 
-      {/* Help button to reopen the guide */}
       {!showGuide && renderHelpButton()}
     </div>
   );
