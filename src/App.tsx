@@ -32,6 +32,23 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
+    // --- START OF LAYOUT FIX ---
+    // This function calculates the actual inner height of the window,
+    // excluding the mobile browser's UI bars.
+    const setRealViewportHeight = () => {
+      // We get the inner height of the window and calculate 1% of it.
+      const vh = window.innerHeight * 0.01;
+      // Then we set the value in the --vh custom property on the root of the document.
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    };
+
+    // Set the initial height
+    setRealViewportHeight();
+
+    // Add an event listener to recalculate on resize (e.g., orientation change)
+    window.addEventListener("resize", setRealViewportHeight);
+    // --- END OF LAYOUT FIX ---
+
     const detected = detectDevice();
     setDeviceType(detected);
 
@@ -40,12 +57,13 @@ const App: React.FC = () => {
       const timer = setTimeout(() => {
         setShowGuide(true);
       }, 1500);
-
       return () => clearTimeout(timer);
     }
+
+    // Cleanup function to remove the event listener
+    return () => window.removeEventListener("resize", setRealViewportHeight);
   }, []);
 
-  // --- OS Switching Functions for all platforms ---
   const switchToMac = () => setDeviceType("macos");
   const switchToWindows = () => setDeviceType("windows");
   const switchToiOS = () => setDeviceType("ios");
@@ -72,21 +90,15 @@ const App: React.FC = () => {
       {deviceType === "windows" && (
         <WindowsDesktop weather={weather} onSwitchToMac={switchToMac} />
       )}
-
       {deviceType === "macos" && (
         <MacDesktop weather={weather} onSwitchToWindows={switchToWindows} />
       )}
-
-      {/* --- REFACTORED Mobile Components --- */}
-      {/* They now receive onSwitchOS and handle their own modals, just like desktop */}
       {deviceType === "ios" && (
         <IOSInterface weather={weather} onSwitchOS={switchToAndroid} />
       )}
-
       {deviceType === "android" && (
         <AndroidInterface weather={weather} onSwitchOS={switchToiOS} />
       )}
-
       {deviceType === "unknown" && (
         <div className="unknown-device">
           <h1>Welcome to My Adaptive Portfolio</h1>
@@ -114,7 +126,6 @@ const App: React.FC = () => {
           </div>
         </div>
       )}
-
       {showGuide && (
         <UserGuide
           deviceType={deviceType}
@@ -122,7 +133,6 @@ const App: React.FC = () => {
           avatarUrl={avatar}
         />
       )}
-
       {!showGuide && renderHelpButton()}
     </div>
   );

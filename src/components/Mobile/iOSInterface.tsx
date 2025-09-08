@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import "./iOS.css";
-import { userConfig } from "../../shared/userConfig";
+// import { userConfig } from "../../shared/userConfig";
 import { LINKS, openExternalLink } from "../../shared/linksConfig";
 import ProjectModal from "../ProjectModal/ProjectModal"; // Import ProjectModal
 
