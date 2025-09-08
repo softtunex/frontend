@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import "./Android.css";
 import { userConfig } from "../../shared/userConfig";
 import { LINKS, openExternalLink } from "../../shared/linksConfig";
+import ProjectModal from "../ProjectModal/ProjectModal"; // Import ProjectModal
 
 interface AndroidProps {
   weather: {
@@ -15,20 +16,20 @@ interface AndroidProps {
       condition: string;
     }>;
   };
-  onProjectClick?: () => void;
   onSwitchOS?: () => void;
 }
 
-const AndroidInterface: React.FC<AndroidProps> = ({
-  weather,
-  onProjectClick,
-  onSwitchOS,
-}) => {
+const AndroidInterface: React.FC<AndroidProps> = ({ weather, onSwitchOS }) => {
   const [showAppDrawer, setShowAppDrawer] = useState(false);
   const [showQuickSettings, setShowQuickSettings] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(
     !!document.fullscreenElement
   );
+
+  // --- MODAL STATE handled internally, like WindowsDesktop.tsx ---
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpenProjectModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
 
   const toggleFullScreen = () => {
     if (!document.fullscreenElement) {
@@ -52,14 +53,13 @@ const AndroidInterface: React.FC<AndroidProps> = ({
     minute: "2-digit",
   });
 
-  // Essential apps only - minimal and functional
   const apps = [
     {
       id: "projects",
       name: "Projects",
       icon: "mdi:folder-multiple",
       color: "#2196F3",
-      onClick: onProjectClick,
+      onClick: handleOpenProjectModal, // Use internal handler
     },
     {
       id: "portfolio",
@@ -111,7 +111,6 @@ const AndroidInterface: React.FC<AndroidProps> = ({
       color: "#4CAF50",
       onClick: () => window.open(LINKS.PHONE),
     },
-    // --- ADDED APPS ---
     {
       id: "switch-os",
       name: "iOS Mode",
@@ -128,7 +127,6 @@ const AndroidInterface: React.FC<AndroidProps> = ({
     },
   ];
 
-  // Dock apps
   const dockApps = [
     {
       icon: "mdi:phone",
@@ -188,186 +186,169 @@ const AndroidInterface: React.FC<AndroidProps> = ({
   };
 
   return (
-    <div className="android-interface">
-      {/* Status Bar */}
-      <div className="android-status-bar">
-        <div className="android-status-left">
-          <span className="android-time">{time}</span>
-        </div>
-        <div className="android-status-right">
-          <div className="android-signal">
-            <div className="signal-bar"></div>
-            <div className="signal-bar active"></div>
-            <div className="signal-bar active"></div>
-            <div className="signal-bar active"></div>
-          </div>
-          <Icon icon="mdi:wifi" width="14" color="white" />
-          <div className="android-battery">
-            <div className="battery-level"></div>
-          </div>
-          <span className="android-battery-text">87%</span>
-        </div>
-      </div>
-
-      {/* Home Screen */}
-      <div className="android-home">
-        {/* Search Bar - REMOVED fullscreen and switcher from here */}
-        <div
-          className="android-search"
-          onClick={() => setShowQuickSettings(true)}
-        >
-          <Icon icon="mdi:magnify" width="18" color="#666" />
-          <span>Search apps & web</span>
-          <div className="android-search-actions">
-            <div className="android-mic">
-              <Icon icon="mdi:microphone" width="16" color="#666" />
-            </div>
-          </div>
-        </div>
-
-        {/* Weather Widget */}
-        <div className="android-weather">
-          <div className="weather-header">
-            <Icon icon="mdi:map-marker" width="14" color="#666" />
-            <span>Lagos, Nigeria</span>
-            <span className="weather-time">{time}</span>
-          </div>
-          <div className="weather-content">
-            <div className="weather-main">
-              <div className="weather-temp">{weather.temperature}°</div>
-              <div className="weather-info">
-                <Icon
-                  icon="mdi:weather-partly-cloudy"
-                  width="32"
-                  color="#666"
-                />
-                <div className="weather-condition">{weather.condition}</div>
+    <>
+      <div className="android-interface">
+        {/* ... existing status bar, home screen, etc. ... */}
+        <div className="android-home">
+          <div
+            className="android-search"
+            onClick={() => setShowQuickSettings(true)}
+          >
+            <Icon icon="mdi:magnify" width="18" color="#666" />
+            <span>Search apps & web</span>
+            <div className="android-search-actions">
+              <div className="android-mic">
+                <Icon icon="mdi:microphone" width="16" color="#666" />
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Apps Grid */}
-        <div className="android-apps-grid">
-          {apps
-            .filter((app) => (onSwitchOS ? true : app.id !== "switch-os")) // Conditionally render switch os icon
-            .map((app) => (
-              <AppIcon key={app.id} app={app} />
-            ))}
-        </div>
-
-        {/* Dock */}
-        <div className="android-dock">
-          {dockApps.map((app, index) => (
-            <div key={index} className="android-dock-app" onClick={app.onClick}>
-              <Icon icon={app.icon} width="24" color="white" />
+          <div className="android-weather">
+            <div className="weather-header">
+              <Icon icon="mdi:map-marker" width="14" color="#666" />
+              <span>Lagos, Nigeria</span>
+              <span className="weather-time">{time}</span>
             </div>
-          ))}
-          <div
-            className="android-app-drawer-btn"
-            onClick={() => setShowAppDrawer(true)}
-          >
-            <div className="drawer-dots">
-              {[...Array(9)].map((_, i) => (
-                <div key={i} className="drawer-dot"></div>
-              ))}
+            <div className="weather-content">
+              <div className="weather-main">
+                <div className="weather-temp">{weather.temperature}°</div>
+                <div className="weather-info">
+                  <Icon
+                    icon="mdi:weather-partly-cloudy"
+                    width="32"
+                    color="#666"
+                  />
+                  <div className="weather-condition">{weather.condition}</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Navigation Bar */}
-      <div className="android-nav">
-        <div className="nav-btn">
-          <Icon icon="mdi:arrow-left" width="20" color="white" />
-        </div>
-        <div className="nav-btn home-btn">
-          <div className="home-indicator"></div>
-        </div>
-        <div className="nav-btn">
-          <Icon icon="mdi:menu" width="20" color="white" />
-        </div>
-      </div>
-
-      {/* App Drawer */}
-      {showAppDrawer && (
-        <div
-          className="android-drawer-overlay"
-          onClick={() => setShowAppDrawer(false)}
-        >
-          <div className="android-drawer" onClick={(e) => e.stopPropagation()}>
-            <div className="drawer-handle"></div>
-            <div className="drawer-header">
-              <input
-                type="text"
-                placeholder="Search apps"
-                className="drawer-search"
-              />
-            </div>
-            <div className="drawer-content">
-              <div className="drawer-apps-grid">
-                {apps.map((app) => (
-                  <AppIcon key={app.id} app={app} size="small" />
+          <div className="android-apps-grid">
+            {apps
+              .filter((app) => (onSwitchOS ? true : app.id !== "switch-os"))
+              .map((app) => (
+                <AppIcon key={app.id} app={app} />
+              ))}
+          </div>
+          <div className="android-dock">
+            {dockApps.map((app, index) => (
+              <div
+                key={index}
+                className="android-dock-app"
+                onClick={app.onClick}
+              >
+                <Icon icon={app.icon} width="24" color="white" />
+              </div>
+            ))}
+            <div
+              className="android-app-drawer-btn"
+              onClick={() => setShowAppDrawer(true)}
+            >
+              <div className="drawer-dots">
+                {[...Array(9)].map((_, i) => (
+                  <div key={i} className="drawer-dot"></div>
                 ))}
               </div>
             </div>
           </div>
         </div>
-      )}
-
-      {/* Quick Settings */}
-      {showQuickSettings && (
-        <div
-          className="android-quick-overlay"
-          onClick={() => setShowQuickSettings(false)}
-        >
-          <div className="android-quick" onClick={(e) => e.stopPropagation()}>
-            <div className="quick-header">
-              <div className="quick-user">
-                <img
-                  src={userConfig.avatar}
-                  alt="User"
-                  className="user-avatar"
+        {/* ... existing nav bar, drawers, etc. ... */}
+        <div className="android-nav">
+          <div className="nav-btn">
+            <Icon icon="mdi:arrow-left" width="20" color="white" />
+          </div>
+          <div className="nav-btn home-btn">
+            <div className="home-indicator"></div>
+          </div>
+          <div className="nav-btn">
+            <Icon icon="mdi:menu" width="20" color="white" />
+          </div>
+        </div>
+        {showAppDrawer && (
+          <div
+            className="android-drawer-overlay"
+            onClick={() => setShowAppDrawer(false)}
+          >
+            <div
+              className="android-drawer"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="drawer-handle"></div>
+              <div className="drawer-header">
+                <input
+                  type="text"
+                  placeholder="Search apps"
+                  className="drawer-search"
                 />
-                <div className="user-info">
-                  <div className="user-name">{userConfig.name}</div>
-                  <div className="user-email">{userConfig.email}</div>
+              </div>
+              <div className="drawer-content">
+                <div className="drawer-apps-grid">
+                  {apps.map((app) => (
+                    <AppIcon key={app.id} app={app} size="small" />
+                  ))}
                 </div>
-              </div>
-              <Icon icon="mdi:cog" width="20" color="#333" />
-            </div>
-            <div className="quick-toggles">
-              <div className="quick-toggle active">
-                <Icon icon="mdi:wifi" width="20" />
-                <span>Wi-Fi</span>
-              </div>
-              <div className="quick-toggle active">
-                <Icon icon="mdi:bluetooth" width="20" />
-                <span>Bluetooth</span>
-              </div>
-              <div className="quick-toggle">
-                <Icon icon="mdi:airplane" width="20" />
-                <span>Airplane</span>
-              </div>
-              <div className="quick-toggle">
-                <Icon icon="mdi:flashlight" width="20" />
-                <span>Flashlight</span>
               </div>
             </div>
           </div>
+        )}
+        {showQuickSettings && (
+          <div
+            className="android-quick-overlay"
+            onClick={() => setShowQuickSettings(false)}
+          >
+            <div className="android-quick" onClick={(e) => e.stopPropagation()}>
+              <div className="quick-header">
+                <div className="quick-user">
+                  <img
+                    src={userConfig.avatar}
+                    alt="User"
+                    className="user-avatar"
+                  />
+                  <div className="user-info">
+                    <div className="user-name">{userConfig.name}</div>
+                    <div className="user-email">{userConfig.email}</div>
+                  </div>
+                </div>
+                <Icon icon="mdi:cog" width="20" color="#333" />
+              </div>
+              <div className="quick-toggles">
+                <div className="quick-toggle active">
+                  <Icon icon="mdi:wifi" width="20" />
+                  <span>Wi-Fi</span>
+                </div>
+                <div className="quick-toggle active">
+                  <Icon icon="mdi:bluetooth" width="20" />
+                  <span>Bluetooth</span>
+                </div>
+                <div className="quick-toggle">
+                  <Icon icon="mdi:airplane" width="20" />
+                  <span>Airplane</span>
+                </div>
+                <div className="quick-toggle">
+                  <Icon icon="mdi:flashlight" width="20" />
+                  <span>Flashlight</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        <div className="android-footer">
+          <Icon
+            icon="simple-icons:react"
+            width="14"
+            color="rgba(255,255,255,0.7)"
+          />
+          <span>Made with React</span>
         </div>
-      )}
-
-      {/* Made with React */}
-      <div className="android-footer">
-        <Icon
-          icon="simple-icons:react"
-          width="14"
-          color="rgba(255,255,255,0.7)"
-        />
-        <span>Made with React</span>
       </div>
-    </div>
+
+      {/* --- RENDER MODAL HERE, like WindowsDesktop.tsx --- */}
+      <ProjectModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        projectId="projects"
+        osType="windows" // Android UI uses Windows-style modal
+      />
+    </>
   );
 };
 

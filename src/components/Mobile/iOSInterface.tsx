@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import "./iOS.css";
 import { userConfig } from "../../shared/userConfig";
 import { LINKS, openExternalLink } from "../../shared/linksConfig";
+import ProjectModal from "../ProjectModal/ProjectModal"; // Import ProjectModal
 
 interface IOSProps {
   weather: {
@@ -15,20 +16,20 @@ interface IOSProps {
       condition: string;
     }>;
   };
-  onProjectClick?: () => void;
   onSwitchOS?: () => void;
 }
 
-const IOSInterface: React.FC<IOSProps> = ({
-  weather,
-  onProjectClick,
-  onSwitchOS,
-}) => {
+const IOSInterface: React.FC<IOSProps> = ({ weather, onSwitchOS }) => {
   const [showSpotlight, setShowSpotlight] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [isFullScreen, setIsFullScreen] = useState(
     !!document.fullscreenElement
   );
+
+  // --- MODAL STATE handled internally, like MacDesktop.tsx ---
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpenProjectModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
 
   const toggleFullScreen = () => {
     if (!document.fullscreenElement) {
@@ -52,7 +53,6 @@ const IOSInterface: React.FC<IOSProps> = ({
     minute: "2-digit",
   });
 
-  // Essential functional apps only
   const appPages = [
     [
       {
@@ -74,7 +74,7 @@ const IOSInterface: React.FC<IOSProps> = ({
         name: "Projects",
         icon: "mdi:folder-multiple",
         color: "#007AFF",
-        onClick: onProjectClick,
+        onClick: handleOpenProjectModal, // Use internal handler
       },
       {
         id: "github",
@@ -111,7 +111,6 @@ const IOSInterface: React.FC<IOSProps> = ({
         color: "#34C759",
         onClick: () => window.open(LINKS.PHONE),
       },
-      // --- ADDED APPS ---
       {
         id: "switch-os",
         name: "Android Mode",
@@ -129,7 +128,6 @@ const IOSInterface: React.FC<IOSProps> = ({
     ],
   ];
 
-  // Dock apps - exactly like iPhone
   const dockApps = [
     {
       icon: "mdi:phone",
@@ -182,100 +180,100 @@ const IOSInterface: React.FC<IOSProps> = ({
   };
 
   return (
-    <div className="iphone-container">
-      {/* iPhone Frame */}
-      <div className="iphone-frame">
-        {/* Dynamic Island */}
-        <div className="dynamic-island"></div>
-
-        {/* Status Bar */}
-        <div className="iphone-status-bar">
-          <div className="status-left">
-            <span className="current-time">{time}</span>
-          </div>
-          <div className="status-right">
-            <div className="cellular-signal">
-              <div className="signal-dot"></div>
-              <div className="signal-dot"></div>
-              <div className="signal-dot active"></div>
-              <div className="signal-dot active"></div>
+    <>
+      <div className="iphone-container">
+        <div className="iphone-frame">
+          <div className="dynamic-island"></div>
+          <div className="iphone-status-bar">
+            <div className="status-left">
+              <span className="current-time">{time}</span>
             </div>
-            <Icon icon="mdi:wifi" width="17" color="white" />
-            <div className="battery-indicator">
-              <div className="battery-fill"></div>
+            <div className="status-right">
+              <div className="cellular-signal">
+                <div className="signal-dot"></div>
+                <div className="signal-dot"></div>
+                <div className="signal-dot active"></div>
+                <div className="signal-dot active"></div>
+              </div>
+              <Icon icon="mdi:wifi" width="17" color="white" />
+              <div className="battery-indicator">
+                <div className="battery-fill"></div>
+              </div>
             </div>
           </div>
+          <div className="iphone-home-screen">
+            <div className="iphone-apps-container">
+              <div className="iphone-apps-grid">
+                {appPages[currentPage]
+                  ?.filter((app) =>
+                    onSwitchOS ? true : app.id !== "switch-os"
+                  )
+                  .map((app) => (
+                    <AppIcon key={app.id} app={app} />
+                  ))}
+              </div>
+            </div>
+            <div className="page-indicators">
+              <div className="page-dot active"></div>
+              <div className="page-dot"></div>
+            </div>
+            <div className="iphone-dock">
+              {dockApps.map((app, index) => (
+                <div key={index} className="dock-app" onClick={app.onClick}>
+                  <div
+                    className="dock-app-icon"
+                    style={{ backgroundColor: app.color }}
+                  >
+                    <Icon icon={app.icon} width="32" color="white" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="home-indicator"></div>
         </div>
-
-        {/* Home Screen Content */}
-        <div className="iphone-home-screen">
-          {/* Apps Grid */}
-          <div className="iphone-apps-container">
-            <div className="iphone-apps-grid">
-              {appPages[currentPage]
-                ?.filter((app) => (onSwitchOS ? true : app.id !== "switch-os"))
-                .map((app) => (
-                  <AppIcon key={app.id} app={app} />
-                ))}
-            </div>
-          </div>
-
-          {/* Page Dots */}
-          <div className="page-indicators">
-            <div className="page-dot active"></div>
-            <div className="page-dot"></div>
-          </div>
-
-          {/* Dock */}
-          <div className="iphone-dock">
-            {dockApps.map((app, index) => (
-              <div key={index} className="dock-app" onClick={app.onClick}>
+        {showSpotlight && (
+          <div
+            className="spotlight-overlay"
+            onClick={() => setShowSpotlight(false)}
+          >
+            <div
+              className="spotlight-container"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="spotlight-search-bar">
+                <Icon icon="mdi:magnify" width="20" color="#666" />
+                <input type="text" placeholder="Search" />
+              </div>
+              <div className="spotlight-results">
                 <div
-                  className="dock-app-icon"
-                  style={{ backgroundColor: app.color }}
+                  className="spotlight-result"
+                  onClick={handleOpenProjectModal}
                 >
-                  <Icon icon={app.icon} width="32" color="white" />
+                  <Icon icon="mdi:folder-multiple" width="24" color="#007AFF" />
+                  <span>Projects</span>
+                </div>
+                <div
+                  className="spotlight-result"
+                  onClick={() => openExternalLink(LINKS.PORTFOLIO)}
+                >
+                  <Icon icon="mdi:briefcase" width="24" color="#FF9500" />
+                  <span>Portfolio</span>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-
-        {/* Home Indicator */}
-        <div className="home-indicator"></div>
+        )}
       </div>
 
-      {/* Spotlight Search */}
-      {showSpotlight && (
-        <div
-          className="spotlight-overlay"
-          onClick={() => setShowSpotlight(false)}
-        >
-          <div
-            className="spotlight-container"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="spotlight-search-bar">
-              <Icon icon="mdi:magnify" width="20" color="#666" />
-              <input type="text" placeholder="Search" />
-            </div>
-            <div className="spotlight-results">
-              <div className="spotlight-result" onClick={onProjectClick}>
-                <Icon icon="mdi:folder-multiple" width="24" color="#007AFF" />
-                <span>Projects</span>
-              </div>
-              <div
-                className="spotlight-result"
-                onClick={() => openExternalLink(LINKS.PORTFOLIO)}
-              >
-                <Icon icon="mdi:briefcase" width="24" color="#FF9500" />
-                <span>Portfolio</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+      {/* --- RENDER MODAL HERE, like MacDesktop.tsx --- */}
+      <ProjectModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        projectId="projects"
+        osType="mac" // iOS UI uses macOS-style modal
+      />
+    </>
   );
 };
 
