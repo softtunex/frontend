@@ -42,7 +42,7 @@
 
 .mac-finder-nav-button:hover {
   background-color: #333333;
-  color: #ffffff;
+  color: var(--color-text-inverse);
 }
 
 .mac-finder-view-options {
@@ -72,12 +72,12 @@
 
 .mac-finder-view-button:hover {
   background-color: #333333;
-  color: #ffffff;
+  color: var(--color-text-inverse);
 }
 
 .mac-finder-view-button.active {
   background-color: #333333;
-  color: #ffffff;
+  color: var(--color-text-inverse);
 }
 
 .mac-finder-path-indicator {

@@ -3,12 +3,13 @@ import React, { useEffect, useState } from "react";
 import { detectDevice, DeviceType } from "./deviceDetection";
 import WindowsDesktop from "./components/Windows/WindowsDesktop";
 import MacDesktop from "./components/MacOS/MacDesktop";
-import MobileInterface from "./components/Mobile/MobileInterface";
+import AndroidInterface from "./components/Mobile/AndroidInterface";
 import UserGuide from "./components/UserGuide/UserGuide";
 import { Icon } from "@iconify/react";
 import { avatar } from "./shared/userConfig";
 import "./App.css";
 import "./Responsive.css";
+import IOSInterface from "./components/Mobile/iOSInterface";
 
 const App: React.FC = () => {
   const [deviceType, setDeviceType] = useState<DeviceType>("unknown");
@@ -52,6 +53,14 @@ const App: React.FC = () => {
     setDeviceType("windows");
   };
 
+  const switchToiOS = () => {
+    setDeviceType("ios");
+  };
+
+  const switchToAndroid = () => {
+    setDeviceType("android");
+  };
+
   const handleGuideClose = () => {
     setShowGuide(false);
   };
@@ -78,20 +87,35 @@ const App: React.FC = () => {
         <MacDesktop weather={weather} onSwitchToWindows={switchToWindows} />
       )}
 
-      {(deviceType === "ios" || deviceType === "android") && (
-        <MobileInterface
-          deviceType={deviceType as "ios" | "android"}
-          weather={weather}
-        />
-      )}
+      {deviceType === "ios" && <IOSInterface weather={weather} />}
+
+      {deviceType === "android" && <AndroidInterface weather={weather} />}
 
       {deviceType === "unknown" && (
         <div className="unknown-device">
           <h1>Welcome to My Adaptive Portfolio</h1>
           <p>
-            Your device type couldn't be automatically detected. The portfolio
-            interface will adapt based on your device.
+            Your device type couldn't be automatically detected. Choose your
+            preferred interface:
           </p>
+          <div className="device-selector">
+            <button onClick={() => setDeviceType("windows")}>
+              <Icon icon="mdi:microsoft-windows" width="32" />
+              Windows
+            </button>
+            <button onClick={() => setDeviceType("macos")}>
+              <Icon icon="mdi:apple" width="32" />
+              macOS
+            </button>
+            <button onClick={() => setDeviceType("ios")}>
+              <Icon icon="mdi:cellphone-iphone" width="32" />
+              iOS
+            </button>
+            <button onClick={() => setDeviceType("android")}>
+              <Icon icon="mdi:android" width="32" />
+              Android
+            </button>
+          </div>
         </div>
       )}
 
@@ -99,7 +123,7 @@ const App: React.FC = () => {
         <UserGuide
           deviceType={deviceType}
           onClose={handleGuideClose}
-          avatarUrl={avatar} // Use shared config
+          avatarUrl={avatar}
         />
       )}
 

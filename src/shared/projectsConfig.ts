@@ -8,13 +8,18 @@ export interface Project {
   description: string;
   longDescription: string;
   logoUrl: string;
+  videoUrl?: string;
+  rating?: number; // Optional - not all projects have ratings
+  downloads?: string; // Optional - not all projects have download stats
+  size?: string; // Optional - not all projects have size info
   imageUrl: string;
+  deviceType?: "mobile" | "web" | "desktop";
   screenshots: string[];
   bgColor: string;
   tools: string[];
   features: string[];
   role: string;
-  year: string;
+  year?: string;
   website?: string; // Optional - some projects don't have public websites (admin dashboards)
 }
 
@@ -26,43 +31,108 @@ export interface Company {
 export const projectsConfig: Record<string, Project> = {
   "area-56": {
     id: "area-56",
-    name: "Area 56 Restaurant",
+    name: "Area 56 Restaurant App",
     company: "Danval Technologies Ltd",
-    category: "Restaurant Web App",
-    year: "2023",
+    category: "Restaurant Mobile App",
+    // year: "2023",
     role: "Senior Frontend Developer",
     description:
-      "Digital ordering and management system for Area 56 Restaurant/Bar",
+      "Mobile ordering platform for Area 56 Restaurant with QR-based table service",
     longDescription:
-      "Area 56 is a comprehensive digital platform designed to streamline operations for Area 56 Restaurant and Bar. The system features an intuitive online ordering system, real-time inventory management, sales analytics, and staff management tools. The responsive design works across all devices, allowing customers to easily browse menus and place orders while giving staff powerful tools to manage the restaurant efficiently.",
+      "Area 56 is a comprehensive mobile ordering platform designed for Area 56 Restaurant and Bar. The app features QR code table scanning for seamless dining experiences, allowing customers to order directly from their tables. With an intuitive menu browsing system, real-time cart management, and integrated payment processing through Paystack and OPay, customers can enjoy a contactless dining experience. The app supports both guest users and registered accounts, with complete order tracking from placement to completion.",
     logoUrl:
       "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744412042/0e7700dc4e77661543c2bc20069ebb76_arvn8e.jpg",
     imageUrl:
-      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744233065/Screenshot_2025-04-09_215933_q3a4my.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757205521/Screenshot_2025-09-06_224325_kbl7ct.png",
+    deviceType: "mobile",
+    videoUrl:
+      "https://res.cloudinary.com/duwdwr0r9/video/upload/v1757203397/Area56Preview_u4ldhb.mp4",
+    rating: 4.8,
+    downloads: "1K+",
+    size: "5.2 MB",
     screenshots: [
-      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744233065/Screenshot_2025-04-09_215933_q3a4my.png",
-      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744233065/Screenshot_2025-04-09_215933_q3a4my.png",
-      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744233065/Screenshot_2025-04-09_215933_q3a4my.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757205521/Screenshot_2025-09-06_224325_kbl7ct.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757205521/Screenshot_2025-09-07_001723_jrseek.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757205522/Screenshot_2025-09-07_001848_oulzrt.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757205522/Screenshot_2025-09-07_001959_fuynmq.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757205526/Screenshot_2025-09-07_002118_mh0m37.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757205522/Screenshot_2025-09-07_002218_zyo64p.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757205525/Screenshot_2025-09-07_002454_kheqxq.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757205524/Screenshot_2025-09-07_002406_wxbtun.png",
     ],
     bgColor: "#D32F2F",
     tools: [
       "React",
       "TypeScript",
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "Stripe API",
-      "Firebase",
+      "React Query",
+      "Tailwind CSS",
+      "Paystack API",
+      "OPay API",
     ],
     features: [
-      "Online ordering system with real-time updates",
-      "Table reservation management",
-      "Inventory tracking and management",
-      "Staff scheduling and performance analytics",
-      "Customer loyalty program integration",
-      "Mobile-responsive design for all devices",
+      "QR code table scanning for contactless ordering",
+      "Real-time menu browsing with categorized items",
+      "Shopping cart management with quantity controls",
+      "Multiple payment options (Paystack, OPay)",
+      "Order tracking with status updates (Cart, Ongoing, Completed)",
+      "Guest user support for quick ordering",
+      "Table assignment and waiter communication system",
+      "Search functionality for menu items",
+      "Order history and reorder capabilities",
     ],
     website: "https://areafiftysix.com/?location_id=4&number=AS16",
+  },
+
+  "area-56-admin": {
+    id: "area-56-admin",
+    name: "Area 56 Admin Dashboard",
+    company: "Danval Technologies Ltd",
+    category: "Restaurant Management System",
+    role: "Senior Frontend Developer",
+    description:
+      "Comprehensive admin dashboard for managing Area 56 Restaurant operations",
+    longDescription:
+      "The Area 56 Admin Dashboard is a powerful restaurant management system that provides complete operational control for Area 56 Restaurant and Bar. The platform features comprehensive sales analytics, real-time order management, staff scheduling, inventory control, and multi-location management. With advanced reporting capabilities, role-based permissions, and real-time notifications, restaurant managers can efficiently oversee all aspects of their business operations across multiple locations.",
+    logoUrl:
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744412042/0e7700dc4e77661543c2bc20069ebb76_arvn8e.jpg",
+    videoUrl:
+      "https://res.cloudinary.com/duwdwr0r9/video/upload/v1757258799/8mb.video-wSv-hk5OJBtH_rnwprw.mp4",
+    imageUrl:
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744233065/Screenshot_2025-04-09_215933_q3a4my.png",
+    deviceType: "desktop",
+    screenshots: [
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744233065/Screenshot_2025-04-09_215933_q3a4my.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757252233/Screenshot_2025-04-09_103131_pm6npw.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757251870/Screenshot_2025-09-07_134903_a02hrr.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757251875/Screenshot_2025-09-07_134952_y3augw.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757251877/Screenshot_2025-09-07_135135_esk8rc.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757251880/Screenshot_2025-09-07_135222_phayzf.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757251881/Screenshot_2025-09-07_135308_vrvlah.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757251885/Screenshot_2025-09-07_135337_wdzswe.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757251885/Screenshot_2025-09-07_135420_bvsyt7.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757251887/Screenshot_2025-09-07_135444_vupltr.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757251892/Screenshot_2025-09-07_135517_esiuse.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757251893/Screenshot_2025-09-07_135547_s9jb5g.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757251895/Screenshot_2025-09-07_140133_cxzuly.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757251898/Screenshot_2025-09-07_140149_hbvrvr.png",
+    ],
+    bgColor: "#1565C0",
+    tools: ["React", "TypeScript", "React Query", "Tailwind CSS", "Chart.js"],
+    features: [
+      "Real-time sales analytics and reporting dashboard",
+      "Comprehensive order management with status tracking",
+      "Table management with QR code generation",
+      "Multi-location restaurant management",
+      "Staff scheduling and calendar management",
+      "Inventory management with stock tracking",
+      "User management and role-based permissions",
+      "Payment processing and financial reporting",
+      "Real-time notifications and alerts system",
+      "Vendor management and procurement tracking",
+      "Customer data management and analytics",
+      "Advanced filtering and search capabilities",
+    ],
+    // No public website for admin dashboard
   },
 
   acadasuite: {
@@ -257,16 +327,13 @@ export const projectsConfig: Record<string, Project> = {
       "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744288208/Screenshot_2022-06-15_194531_u551bg.jpg",
     screenshots: [
       "https://res.cloudinary.com/duwdwr0r9/image/upload/v1744288208/Screenshot_2022-06-15_194531_u551bg.jpg",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757268774/image_upvqhi.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757268773/image_dtbfsv.jpg",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757268774/image_2_menumf.png",
+      "https://res.cloudinary.com/duwdwr0r9/image/upload/v1757268775/image_1_yzkowf.png",
     ],
     bgColor: "#689F38",
-    tools: [
-      "Angular",
-      "TypeScript",
-      "NgRx",
-      "Bootstrap",
-      ".NET Core",
-      "SQL Server",
-    ],
+    tools: ["MVC .NET", "JavaScript", "JQuery", "Bootstrap"],
     features: [
       "Employee data management",
       "Leave and absence tracking",

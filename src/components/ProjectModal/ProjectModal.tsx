@@ -130,14 +130,15 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                     className={`project-image ${osType}`}
                     style={{
                       backgroundImage: `url(${featuredProject.imageUrl})`,
-                      backgroundSize: "cover",
+                      backgroundSize: "contain",
+                      backgroundRepeat: "no-repeat",
                       backgroundPosition: "center",
                       position: "relative",
                       borderRadius: "12px",
                       overflow: "hidden",
                     }}
                   >
-                    <div className="project-logo-container">
+                    {/* <div className="project-logo-container">
                       {featuredProject.logoUrl && (
                         <img
                           src={featuredProject.logoUrl}
@@ -145,7 +146,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                           className="project-logo-img"
                         />
                       )}
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               )}
@@ -166,7 +167,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                         onClick={() => handleProjectClick(project.id)}
                       >
                         <div className="project-item-header">
-                          <div className="project-item-logo">
+                          {/* <div className="project-item-logo">
                             {project.logoUrl && (
                               <img
                                 src={project.logoUrl}
@@ -174,7 +175,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                                 className="project-logo-small"
                               />
                             )}
-                          </div>
+                          </div> */}
                           <div className="project-item-details">
                             <h4>{project.name}</h4>
                             <p>{project.category}</p>
@@ -184,7 +185,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                           className="project-item-image"
                           style={{
                             backgroundImage: `url(${project.imageUrl})`,
-                            backgroundSize: "cover",
+                            backgroundSize: "contain",
+                            backgroundRepeat: "no-repeat",
                             backgroundPosition: "center",
                           }}
                         ></div>
