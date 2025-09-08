@@ -38,7 +38,8 @@
 .android-interface {
   width: 100%;
   max-width: 400px;
-  height: 100vh;
+  /* --- MODIFIED: Use the new calculated height --- */
+  height: calc(var(--vh, 1vh) * 100);
   margin: 0 auto;
   background: url("https://wallpapercave.com/wp/wp9764008.jpg") center center /
     cover no-repeat;
@@ -48,6 +49,8 @@
   font-family: "Roboto", "Segoe UI", sans-serif;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
+
+/* ... all other styles remain the same ... */
 
 /* Status Bar */
 .android-status-bar {
@@ -141,7 +144,7 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 28px - 50px);
+  min-height: calc(calc(var(--vh, 1vh) * 100) - 28px - 50px);
 }
 
 /* Search Bar */
@@ -648,7 +651,7 @@
 @media (min-width: 481px) and (max-width: 768px) {
   .android-interface {
     max-width: 360px;
-    height: 90vh;
+    height: 90vh; /* Keep this for larger screens */
     margin: 5vh auto;
   }
 }
@@ -656,7 +659,7 @@
 @media (min-width: 769px) {
   .android-interface {
     max-width: 400px;
-    height: 85vh;
+    height: 85vh; /* Keep this for larger screens */
     margin: 7.5vh auto;
   }
 }

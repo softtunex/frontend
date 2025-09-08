@@ -6,7 +6,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* --- MODIFIED: Use the new calculated height --- */
+  height: calc(var(--vh, 1vh) * 100);
   background: #f0f0f0;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
 }
@@ -264,7 +265,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 0 8px 8px 8px;
+  margin: 0 8px 68px 8px;
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
@@ -381,7 +382,8 @@
 @media (max-width: 480px) {
   .iphone-frame {
     width: 100vw;
-    height: 100vh;
+    /* --- MODIFIED: Use the new calculated height --- */
+    height: calc(var(--vh, 1vh) * 100);
     border-radius: 0;
     border: none;
     box-shadow: none;
