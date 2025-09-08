@@ -4,12 +4,12 @@ import { detectDevice, DeviceType } from "./deviceDetection";
 import WindowsDesktop from "./components/Windows/WindowsDesktop";
 import MacDesktop from "./components/MacOS/MacDesktop";
 import AndroidInterface from "./components/Mobile/AndroidInterface";
+import IOSInterface from "./components/Mobile/iOSInterface";
 import UserGuide from "./components/UserGuide/UserGuide";
 import { Icon } from "@iconify/react";
 import { avatar } from "./shared/userConfig";
 import "./App.css";
 import "./Responsive.css";
-import IOSInterface from "./components/Mobile/iOSInterface";
 
 const App: React.FC = () => {
   const [deviceType, setDeviceType] = useState<DeviceType>("unknown");
@@ -45,21 +45,11 @@ const App: React.FC = () => {
     }
   }, []);
 
-  const switchToMac = () => {
-    setDeviceType("macos");
-  };
-
-  const switchToWindows = () => {
-    setDeviceType("windows");
-  };
-
-  const switchToiOS = () => {
-    setDeviceType("ios");
-  };
-
-  const switchToAndroid = () => {
-    setDeviceType("android");
-  };
+  // --- OS Switching Functions for all platforms ---
+  const switchToMac = () => setDeviceType("macos");
+  const switchToWindows = () => setDeviceType("windows");
+  const switchToiOS = () => setDeviceType("ios");
+  const switchToAndroid = () => setDeviceType("android");
 
   const handleGuideClose = () => {
     setShowGuide(false);
@@ -87,9 +77,15 @@ const App: React.FC = () => {
         <MacDesktop weather={weather} onSwitchToWindows={switchToWindows} />
       )}
 
-      {deviceType === "ios" && <IOSInterface weather={weather} />}
+      {/* --- REFACTORED Mobile Components --- */}
+      {/* They now receive onSwitchOS and handle their own modals, just like desktop */}
+      {deviceType === "ios" && (
+        <IOSInterface weather={weather} onSwitchOS={switchToAndroid} />
+      )}
 
-      {deviceType === "android" && <AndroidInterface weather={weather} />}
+      {deviceType === "android" && (
+        <AndroidInterface weather={weather} onSwitchOS={switchToiOS} />
+      )}
 
       {deviceType === "unknown" && (
         <div className="unknown-device">
