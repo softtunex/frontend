@@ -1,0 +1,410 @@
+/* --- REMOVED .fullscreen-button and .os-switch-button styles --- */
+
+/* iOS.css - Authentic iPhone Design */
+
+.iphone-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f0f0f0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+}
+
+.iphone-frame {
+  width: 375px;
+  height: 812px;
+  background: url("https://res.cloudinary.com/duwdwr0r9/image/upload/v1757289412/iOS_17_wallpaper_nxax8v.jpg")
+    center center / cover no-repeat;
+  border-radius: 40px;
+  border: 8px solid #1c1c1e;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 2px #333,
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Dynamic Island */
+.dynamic-island {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 126px;
+  height: 37px;
+  background: #000;
+  border-radius: 19px;
+  z-index: 1000;
+}
+
+/* Status Bar */
+.iphone-status-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+  z-index: 900;
+}
+
+.status-left {
+  margin-top: 10px;
+}
+
+.status-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.cellular-signal {
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+  margin-right: 2px;
+}
+
+.signal-dot {
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+}
+
+.signal-dot:nth-child(2) {
+  height: 6px;
+}
+.signal-dot:nth-child(3) {
+  height: 8px;
+}
+.signal-dot:nth-child(4) {
+  height: 10px;
+}
+.signal-dot.active {
+  background: white;
+}
+
+.battery-indicator {
+  width: 24px;
+  height: 12px;
+  border: 1px solid white;
+  border-radius: 3px;
+  position: relative;
+  margin-left: 3px;
+}
+
+.battery-indicator::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: 2px;
+  width: 2px;
+  height: 6px;
+  background: white;
+  border-radius: 0 1px 1px 0;
+}
+
+.battery-fill {
+  width: 80%;
+  height: 100%;
+  background: white;
+  border-radius: 2px;
+}
+
+/* Home Screen */
+.iphone-home-screen {
+  padding: 60px 16px 16px 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Apps Container */
+.iphone-apps-container {
+  flex: 1;
+  display: flex;
+  align-items: flex-start; /* MODIFIED: Align apps to the top */
+  justify-content: center;
+  padding-top: 20px; /* MODIFIED: Add some padding at the top */
+}
+
+.iphone-apps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 20px; /* MODIFIED: Added row-gap */
+  column-gap: 12px; /* MODIFIED: Changed from 'gap' */
+  width: 100%;
+  padding: 0 8px;
+}
+
+.iphone-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.iphone-app:active {
+  transform: scale(0.9);
+}
+
+.iphone-app-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.24);
+  position: relative;
+}
+
+/* Calendar Icon - Authentic iPhone Style */
+.calendar-icon {
+  background: white !important;
+  padding: 0;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.calendar-red-header {
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(180deg, #ff3b30 0%, #d70015 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.calendar-red-header::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 12px;
+  width: 2px;
+  height: 8px;
+  background: #fff;
+  border-radius: 1px;
+  box-shadow: 34px 0 0 #fff;
+}
+
+.calendar-month {
+  color: white;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.calendar-day-number {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 22px;
+  font-weight: 300;
+}
+
+.iphone-app-name {
+  font-size: 12px;
+  color: white;
+  text-align: center;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Page Indicators */
+.page-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px; /* MODIFIED: Changed from margin: 16px 0 */
+}
+
+.page-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transition: all 0.2s ease;
+}
+
+.page-dot.active {
+  background: white;
+  transform: scale(1.2);
+}
+
+/* Dock - FIXED */
+.iphone-dock {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-radius: 28px;
+  padding: 12px; /* MODIFIED: Adjusted padding */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 8px 8px 8px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.dock-app {
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.dock-app:active {
+  transform: scale(0.9);
+}
+
+.dock-app-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+/* Home Indicator */
+.home-indicator {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 134px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+}
+
+/* Spotlight Search */
+.spotlight-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 100px;
+  z-index: 2000;
+}
+
+.spotlight-container {
+  width: 350px;
+  background: rgba(242, 242, 247, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.spotlight-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.spotlight-search-bar input {
+  flex: 1;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 17px;
+  color: #000;
+}
+
+.spotlight-search-bar input::placeholder {
+  color: #8e8e93;
+}
+
+.spotlight-results {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.spotlight-result {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.spotlight-result:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.spotlight-result span {
+  font-size: 17px;
+  color: #000;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .iphone-frame {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+  }
+
+  .dynamic-island {
+    top: 8px;
+  }
+
+  .iphone-home-screen {
+    padding: 50px 12px 12px 12px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .iphone-frame {
+    width: 360px;
+    height: 780px;
+  }
+}
+
+@media (min-width: 769px) {
+  .iphone-container {
+    padding: 20px;
+  }
+}

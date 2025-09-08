@@ -7,7 +7,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 1000;
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,7 +29,10 @@
   max-height: 85vh;
   overflow-y: auto;
   border-radius: 12px;
-  transition: width 0.3s, max-width 0.3s, height 0.3s;
+  transition:
+    width 0.3s,
+    max-width 0.3s,
+    height 0.3s;
 }
 
 .modal-container.windows {
@@ -185,7 +188,9 @@
   gap: 30px;
   margin-bottom: 40px;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   background-color: transparent;
   border-radius: 12px;
   padding: 0;
@@ -303,7 +308,9 @@
   background-color: #252525;
   border-radius: 10px;
   overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   display: flex;
   flex-direction: column;
   cursor: pointer;
@@ -453,8 +460,8 @@
   background-color: #1a1a1a;
   color: #fff;
   padding: 20px 30px;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
-    sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
 }
 
 /* Loading state */
